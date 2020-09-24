@@ -1,11 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Section from './components/sections';
 import Navbar from './components/navbar';
-
-import uikit from '../node_modules/uikit/dist/js/uikit.js';
-import '../node_modules/uikit/dist/css/uikit.css';
-
 
 class App extends React.Component {
 
@@ -13,28 +8,29 @@ class App extends React.Component {
   render() {
 
     return (
-      <div className="app">
+      <React.Fragment>
+        <header>
+          <Navbar />
+        </header>
 
-        <Navbar />
 
-        <Section />
+        <footer>
 
-        <Section />
-
-      </div>
+        </footer>
+      </React.Fragment>
     )
   }
 }
 
-const mapStateToProps = (props) => {
-  return props;
-}
+const mapStateToProps = props => (props);
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     getAsyncPostsHandler: (count) => {
+//       dispatch(getAsyncPosts(count));
+//     }
+//   };
+// };
 
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);
 

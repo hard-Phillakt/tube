@@ -1,12 +1,9 @@
-
 import React from 'react';
 
 const btnDefault = (props) => {
 
-    console.log(props);
-
     return (
-        <button className="uk-button uk-button-default" onClick={() => (props.getPosts(10))}>
+        <button className="uk-button uk-button-default" onClick={() => (props.getPosts ? props.getPosts(10) : null)}>
             {props.name}
         </button>
     )

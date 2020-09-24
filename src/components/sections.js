@@ -1,12 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAsyncPosts } from '../actions/actions';
-import BtnDefault from '../ui/btnDefault';
 
+import BtnDefault from '../ui/btnDefault';
 
 class Sections extends React.Component {
 
 
+    getTitle(){
+        return (
+            <h1 className="
+            uk-heading-line 
+            uk-heading-medium 
+            uk-padding 
+            uk-padding-remove-left
+            uk-padding-remove-top
+            ">
+            <span>{this.props.title}</span>
+        </h1>
+        )
+    }
 
     render() {
 
@@ -14,18 +26,14 @@ class Sections extends React.Component {
             <div>
                 <div className="uk-section">
                     <div className="uk-container">
-                        <h1 className="uk-heading-line uk-heading-medium 
-                        uk-padding 
-                        uk-padding-remove-left
-                        uk-padding-remove-top
-                        ">
-                            <span>Section one</span>
-                        </h1>
+
+                        { this.props.title ? this.getTitle() : null } 
+
                         <div uk-grid="true" className="uk-grid-match">
 
                             {
-                                this.props.posts.data ?
-                                    this.props.posts.data.map((item, i) => {
+                                this.props.dataPosts ?
+                                    this.props.dataPosts.map((item, i) => {
 
                                         return (
                                             <div
@@ -34,9 +42,10 @@ class Sections extends React.Component {
                                             >
 
                                                 <div className="uk-card uk-card-default uk-card-body"
-                                                    style={{backgroundImage: 'url(' + item.url + ')'}}
+                                                    style={{ backgroundImage: `url(${item.url})` }}
                                                 >
-                                                    <p>{item.title}</p>
+
+                                                    {/* <p>{item.title}</p> */}
                                                 </div>
 
                                             </div>
@@ -47,7 +56,7 @@ class Sections extends React.Component {
                         </div>
 
                         <div className="uk-flex-center" uk-grid="true">
-                            <BtnDefault name="Загрузить еще..." getPosts={this.props.getAsyncPostsHandler} />
+                            <BtnDefault name="Загрузить еще..." getPosts={this.props.getPosts} />
                         </div>
 
                     </div>
@@ -57,16 +66,6 @@ class Sections extends React.Component {
     }
 }
 
-const mapStateToProps = (props) => {
-    return props;
-}
+const mapStateToProps = props => (props);
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getAsyncPostsHandler: (count) => {
-            dispatch(getAsyncPosts(count));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sections);
+export default connect(mapStateToProps, null)(Sections);

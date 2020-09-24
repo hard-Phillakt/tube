@@ -22,8 +22,6 @@ export const getAsyncPosts = (count) => {
                 dispatch(getPostsAction(postSlice));
 
                 iterable = sumpost;
-
-                console.log(iterable);
             });
     }
 
