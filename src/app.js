@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Navbar from './components/navbar';
+import Navbar from './components/navbar/navbar';
+import Footer from './components/footer';
 
 class App extends React.Component {
 
@@ -14,9 +15,8 @@ class App extends React.Component {
         </header>
 
 
-        <footer>
+        <Footer />
 
-        </footer>
       </React.Fragment>
     )
   }

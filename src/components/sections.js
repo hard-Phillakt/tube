@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 
 import BtnDefault from '../ui/btnDefault';
 
@@ -42,10 +43,12 @@ class Sections extends React.Component {
                                             >
 
                                                 <div className="uk-card uk-card-default uk-card-body"
-                                                    style={{ backgroundImage: `url(${item.url})` }}
+                                                    // style={{ backgroundImage: `url(${item.url})` }}
                                                 >
 
-                                                    {/* <p>{item.title}</p> */}
+                                                    <p>
+                                                        <Link to={"page/" + item.id}>{item.title}</Link>
+                                                    </p>
                                                 </div>
 
                                             </div>

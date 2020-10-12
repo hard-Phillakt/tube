@@ -1,6 +1,6 @@
 
 const stateInit = {
-    data: []
+    data: [],
 }
 
 const posts = (state = stateInit, action) => {
