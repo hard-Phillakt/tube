@@ -1,22 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Section from '../components/sections';
+import Section from '../components/sections/sections';
 import { getAsyncPosts } from '../actions/actions';
 
 
 class Home extends React.Component {
 
 
+  componentDidMount(){
+    this.props.getAsyncPostsHandler(10);
+  }
+
   render() {
 
     return (
-      <div className="home">
+      <section className="home">
 
-        <Section title="Section one" getPosts={this.props.getAsyncPostsHandler} dataPosts={this.props.posts.data} />
+        <Section title="Улетный TRIP" getPosts={this.props.getAsyncPostsHandler} dataPosts={this.props.posts.data} />
 
-        <Section title="Section two" dataPosts={this.props.posts.data} />
+        <Section title="Пол-литровая мышь" />
 
-      </div>
+      </section>
     )
   }
 }

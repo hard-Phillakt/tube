@@ -3,20 +3,33 @@ import { connect } from 'react-redux';
 
 import { Link } from "react-router-dom";
 
+//  Player 
+import Plyr from 'plyr';
+import "../components/plyr/sass/plyr.scss";
+import "../components/plyr/sass/_custom.scss";
+
+
 class Page extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+    }
 
     componentDidMount() {
         // this.props.setDataPath(this.props.match);
+        new Plyr(`#${this.myRef.current.id}`, {
+            controls: ['play-large', 'progress', 'current-time', 'volume', 'fullscreen']
+        });
     }
 
     render() {
 
-        console.log(this.props);
-        
+        // console.log(this.props);
+
         return (
 
-            <div className="
+            <section className="
             page
             uk-padding 
             uk-padding-remove-left
@@ -31,8 +44,11 @@ class Page extends React.Component {
                     <h1>Title Page</h1>
                     <div className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid="true">
                         <div className="uk-card-media-left uk-cover-container">
-                            {/* <img src="images/light.jpg" alt="text" uk-cover="true" /> */}
-                            <canvas width={600} height={400} />
+
+                            <video id="player" playsInline controls ref={this.myRef}>
+                                <source src="https://hard-phillakt.github.io/one.mp4" type="video/mp4" />
+                            </video>
+
                         </div>
                         <div>
                             <div className="uk-card-body">
@@ -42,7 +58,7 @@ class Page extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
 
         )

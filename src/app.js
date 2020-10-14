@@ -10,10 +10,9 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <header>
+        <section>
           <Navbar />
-        </header>
-
+        </section>
 
         <Footer />
 

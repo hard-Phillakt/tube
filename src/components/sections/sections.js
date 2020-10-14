@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
-import BtnDefault from '../ui/btnDefault';
+import BtnDefault from '../../ui/btnDefault';
+
+import "./_sections.scss";
 
 class Sections extends React.Component {
 
 
-    getTitle(){
+    getTitle() {
         return (
             <h1 className="
             uk-heading-line 
@@ -15,9 +17,10 @@ class Sections extends React.Component {
             uk-padding 
             uk-padding-remove-left
             uk-padding-remove-top
+            tb-title__h1
             ">
-            <span>{this.props.title}</span>
-        </h1>
+                <span>{this.props.title}</span>
+            </h1>
         )
     }
 
@@ -28,7 +31,7 @@ class Sections extends React.Component {
                 <div className="uk-section">
                     <div className="uk-container">
 
-                        { this.props.title ? this.getTitle() : null } 
+                        {this.props.title ? this.getTitle() : null}
 
                         <div uk-grid="true" className="uk-grid-match">
 
@@ -41,16 +44,14 @@ class Sections extends React.Component {
                                                 className="uk-width-1-5@m"
                                                 key={item.thumbnailUrl}
                                             >
-
-                                                <div className="uk-card uk-card-default uk-card-body"
+                                                <div className="uk-card uk-card-default uk-card-body tb-card-body"
                                                     // style={{ backgroundImage: `url(${item.url})` }}
                                                 >
-
-                                                    <p>
-                                                        <Link to={"page/" + item.id}>{item.title}</Link>
-                                                    </p>
                                                 </div>
-
+                                                <div>
+                                                    {/* <Link className="tb-link" to={"page/" + item.id}>{item.title}</Link> */}
+                                                    <Link className="tb-link" to={"page/" + item.id}>Описание серии</Link>
+                                                </div>
                                             </div>
                                         )
                                     }) : null
@@ -59,7 +60,7 @@ class Sections extends React.Component {
                         </div>
 
                         <div className="uk-flex-center" uk-grid="true">
-                            <BtnDefault name="Загрузить еще..." getPosts={this.props.getPosts} />
+                            <BtnDefault name="Показать еще..." getPosts={this.props.getPosts} />
                         </div>
 
                     </div>

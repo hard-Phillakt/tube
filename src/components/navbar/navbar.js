@@ -22,29 +22,21 @@ class Navbar extends React.Component {
         return (
 
             <Router>
-                <div className="uk-section-default">
-                    <div className="uk-container">
-                        <nav className="uk-margin" uk-navbar="mode: hover">
-                            <div className="uk-navbar-left">
-                                <ul className="uk-navbar-nav">
-                                    <li className="uk-active"><Link to="/">Home</Link></li>
-                                    <li><Link to="/about">About</Link></li>
-                                    <li><Link to="/gallery">Gallery</Link></li>
-                                    <li>
-                                        <Link to="#">Parent</Link>
-                                        <div className="uk-navbar-dropdown">
-                                            <ul className="uk-nav uk-navbar-dropdown-nav">
-                                                <li className="uk-active"><Link to="#">Active</Link></li>
-                                                <li><Link to="#">Item</Link></li>
-                                                <li><Link to="#">Item</Link></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
+                <header>
+                    <div className="uk-section-secondary uk-light">
+                        <div className="uk-container uk-container-xlarge">
+                            <nav className="uk-margin" uk-navbar="mode: hover">
+                                <div className="uk-navbar-left">
+                                    <ul className="uk-navbar-nav">
+                                        <li className="uk-active"><Link to="/">Главная</Link></li>
+                                        <li><Link to="/about">Сериалы</Link></li>
+                                        <li><Link to="/gallery">Мультфильмы</Link></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
                     </div>
-                </div>
+                </header>
 
                 <Switch>
                     <Route exact path="/" component={Home} />

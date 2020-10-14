@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Section from '../components/sections';
+import Section from '../components/sections/sections';
 import { getAsyncPosts } from '../actions/actions';
 
 class Gallery extends React.Component {
@@ -9,13 +9,11 @@ class Gallery extends React.Component {
     render() {
 
         return (
-            <div className="gallery">
+            <section className="gallery">
 
                 <Section title="Section gallery one" />
 
-                <Section title="Section gallery two" getPosts={this.props.getAsyncPostsHandler} dataPosts={this.props.posts.data} />
-
-            </div>
+            </section>
         )
     }
 }

@@ -1,0 +1,44 @@
+
+
+.tb {
+
+    &-title {
+
+        &__h1 {
+            
+            span {
+                font-size: 2rem;
+                font-weight: 100;
+                text-transform: uppercase;
+                
+
+                &::after, &::before {
+                    content: "";
+                    position: absolute;
+                    top: calc(50% - ((0px + 0.05em) / 2));
+                    width: 2000px;
+                    border-bottom: calc(0px + 0.01em) solid #2222222e;
+                }
+            }
+        }
+    }
+
+    &-card-body {
+        height: 270px;
+        background: #2222222e !important;
+    }
+
+    &-link {
+        overflow: hidden;
+        max-height: 54px;
+        margin: 5px 0 0;
+        font-size: 15px;
+        font-weight: 100;
+        line-height: 18px;
+        color: #333;
+
+        &:hover, &:focus {
+            color: #333;
+        }
+    }
+}
