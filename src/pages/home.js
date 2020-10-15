@@ -6,9 +6,17 @@ import { getAsyncPosts } from '../actions/actions';
 
 class Home extends React.Component {
 
+  constructor(props){
+    super(props);
+
+    this.list = ['Улетный TRIP', 'Пол-литровая мышь', '38 обезьян', 'Робоцып', 'Металлопокалипсис', 'Тюряга'];
+  }
 
   componentDidMount(){
-    this.props.getAsyncPostsHandler(10);
+
+    if(this.props.posts.data.length <= 0){
+      this.props.getAsyncPostsHandler(5);
+    }
   }
 
   render() {
@@ -16,9 +24,16 @@ class Home extends React.Component {
     return (
       <section className="home">
 
-        <Section title="Улетный TRIP" getPosts={this.props.getAsyncPostsHandler} dataPosts={this.props.posts.data} />
+        {
+          
+          this.list.map((item, i) => {
+            
+              return (
+                <Section title={item} key={item + i} dataPosts={this.props.posts.data} />
+              )
+          })
 
-        <Section title="Пол-литровая мышь" />
+        }
 
       </section>
     )
