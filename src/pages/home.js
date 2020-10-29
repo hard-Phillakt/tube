@@ -8,7 +8,10 @@ class Home extends React.Component {
 
 
   componentDidMount(){
-    this.props.getAsyncPostsHandler(10);
+
+    if(this.props.posts.data.length <= 0){
+      this.props.getAsyncPostsHandler(5);
+    }    
   }
 
   render() {

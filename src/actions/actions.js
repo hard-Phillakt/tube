@@ -10,23 +10,23 @@ let iterable = 0;
 
 export const getAsyncPosts = (count) => {
 
-    return (dispatch) => {
-        fetch('https://jsonplaceholder.typicode.com/photos')
-            .then(response => response.json())
+    return (dispatch) => 
+        // fetch('https://jsonplaceholder.typicode.com/photos')
+        fetch('http://basic/posts')
+            .then(response => response.json())  
             .then(json => {
 
-                let sumpost = parseInt(iterable + count);
+                console.log(json);
 
-                let postSlice = json.splice(0, sumpost);
+                // let sumpost = parseInt(iterable + count);
 
-                dispatch(getPostsAction(postSlice));
+                // let postSlice = json.splice(0, sumpost);
 
-                iterable = sumpost;
+                // dispatch(getPostsAction(postSlice));
 
-                console.log(iterable);
+                // iterable = sumpost;
+
+                // console.log(iterable);
             });
     }
-
-}
-
 

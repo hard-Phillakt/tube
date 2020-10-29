@@ -6,7 +6,7 @@ import About from '../../pages/about';
 import Gallery from '../../pages/gallery';
 import Page from '../../pages/page';
 
-import './navbar.scss';
+import './_navbar.scss';
 
 import {
     BrowserRouter as Router,
