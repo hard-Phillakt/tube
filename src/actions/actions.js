@@ -1,4 +1,6 @@
+import timer from '../components/_timer/timer';
 
+//  Получить категории с фильмами
 const getPostsAction = (posts) => {
     return {
         type: 'GET_POSTS',
@@ -6,27 +8,127 @@ const getPostsAction = (posts) => {
     }
 }
 
-let iterable = 0;
+export const getAsyncPosts = (param, count) => {
 
-export const getAsyncPosts = (count) => {
+    return (dispatch) =>
+        fetch('http://tube-serv/api/v1/cats?expand=films,genres')
+            .then(response => response.json())
+            .then(json => {
+                if (json) {
 
-    return (dispatch) => 
-        // fetch('https://jsonplaceholder.typicode.com/photos')
-        fetch('http://basic/posts')
-            .then(response => response.json())  
+                    const section_cats = {
+                        items: []
+                    };
+
+                    json.items.forEach((item, i) => {
+
+                        //  Фильтруем категории по жанрам 
+                        if (item.genres[0].slug === param) {
+                            
+                            //  если в категории есть посты 
+                            if(item.films.length){
+                                item.films = item.films.splice(0, count ? count : 3);
+                            }
+                            
+                            section_cats.items.push(item);
+                        }
+                    });
+
+                    if (section_cats.items.length) {
+                        dispatch(getPostsAction(section_cats));
+                    }else {
+                        dispatch(getPostsAction(section_cats.items = false));
+                    }
+                }
+            });
+}
+
+//  Получить фильм по id
+const getPostbyIdAction = (currentPost) => {
+    return {
+        type: 'GET_POST_BY_ID',
+        currentPost
+    }
+}
+
+export const getAsyncPostbyIdAction = (params) => {
+
+    return (dispatch) =>
+        fetch(`http://tube-serv/api/v1/cats?expand=films`)
+            .then(response => response.json())
             .then(json => {
 
-                console.log(json);
+                json.items.forEach((cat, i) => {
+                    if (cat.slug === params.cat) {
+                        cat.films.forEach((film, i) => {
+                            if (film.id === parseInt(params.id)) {
+                                dispatch(getPostbyIdAction(film));
+                            }
+                        })
+                    }
+                });
 
-                // let sumpost = parseInt(iterable + count);
-
-                // let postSlice = json.splice(0, sumpost);
-
-                // dispatch(getPostsAction(postSlice));
-
-                // iterable = sumpost;
-
-                // console.log(iterable);
             });
+}
+
+//  Получить все фильмы из категории без текущего фильма в слайдер
+const getMovAllFromCatAction = (allFilms) => {
+    return {
+        type: 'GET_MOV_ALL_FROM_CAT',
+        allFilms
     }
+}
+
+export const getAsyncMovAllFromCatAction = (params) => {
+
+    return (dispatch) =>
+        fetch('http://tube-serv/api/v1/cats?expand=films')
+            .then(response => response.json())
+            .then(json => {
+
+                json.items.forEach((cat, i) => {
+                    if (cat.slug === params.cat) {
+                        let allFilms = [];
+
+                        cat.films.find((item) => {
+                            if (item.id !== parseInt(params.id)) {
+                                allFilms.push(item);
+                            }
+                        })
+
+                        dispatch(getMovAllFromCatAction(allFilms));
+                    }
+                });
+            });
+}
+
+//  Получить фильм по id из слайдера
+const getPostbyIdFromSliderAction = (currentPost) => {
+    return {
+        type: 'GET_POST_BY_ID_FROM_SLIDER',
+        currentPost
+    }
+}
+
+export const getAsyncPostbyIdFromSliderAction = (params) => {
+
+    return (dispatch) =>
+        fetch(`http://tube-serv/api/v1/cats?expand=films`)
+            .then(response => response.json())
+            .then(json => {
+                json.items.forEach((cat, i) => {
+                    if (cat.slug === params.cat) {
+                        cat.films.forEach((film, i) => {
+                            if (film.id === parseInt(params.id)) {
+                                dispatch(getPostbyIdFromSliderAction(film));
+                            }
+                        })
+                    }
+                });
+
+            });
+}
+
+
+
 

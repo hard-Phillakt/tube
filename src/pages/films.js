@@ -1,27 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Section from '../components/sections/sections';
-import { getAsyncPosts } from '../actions/actions';
 import Preloader from '../components/preloader/preloader';
+import { getAsyncPosts } from '../actions/actions';
 
-class Home extends React.Component {
+
+class Films extends React.Component {
 
   constructor(props) {
     super(props);
-
   }
 
   componentDidMount() {
 
-    this.props.getAsyncPostsHandler('popular');
+    this.props.getAsyncPostsHandler('filmy');
   }
 
   render() {
 
     return (
-      // <Section title="Section Home" />
+      <section className="films">
 
-      <section className="home">
         {
 
           this.props.posts.data.items ?
@@ -29,14 +28,20 @@ class Home extends React.Component {
             this.props.posts.data.items.map((item, i) => {
 
               return (
-                <Section title={item.title} key={item.title} dataPosts={item} />
+                //  Делаем рендер компонента и проверяем наличие постов в категории
+                <Section 
+                title={item.title} 
+                key={item.title} 
+                dataPosts={item.films.length ? item : false} 
+                viewBtnLoader={item.films.length ? true : false}/>
               )
 
             })
-            :
+            : 
             <Preloader />
-
+            
         }
+
       </section>
     )
   }
@@ -46,6 +51,7 @@ const mapStateToProps = props => {
   return props;
 };
 
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getAsyncPostsHandler: (count) => {
@@ -54,5 +60,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Films);
 

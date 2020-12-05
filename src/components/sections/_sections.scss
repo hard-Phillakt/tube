@@ -1,18 +1,13 @@
-
-
 .tb {
-
     &-title {
-
         &__h1 {
-            
             span {
                 font-size: 2rem;
                 font-weight: 100;
                 text-transform: uppercase;
-                
 
-                &::after, &::before {
+                &::after,
+                &::before {
                     content: "";
                     position: absolute;
                     top: calc(50% - ((0px + 0.05em) / 2));
@@ -25,7 +20,7 @@
 
     &-card-body {
         height: 270px;
-        background: #2222222e !important;
+        background: #666 !important;
     }
 
     &-link {
@@ -37,8 +32,26 @@
         line-height: 18px;
         color: #333;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             color: #333;
         }
     }
+
+    &-tooltip-box {
+        cursor: pointer;
+        overflow: hidden;
+        max-height: 54px;
+        margin: 5px 0 0;
+        font-size: 15px;
+        font-weight: 100;
+        line-height: 18px;
+        color: #333;
+    }
+}
+
+.uk-tooltip {
+    color: #000 !important;
+    background: #fff !important;
+    border-radius: 0 !important;
 }

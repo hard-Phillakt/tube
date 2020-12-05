@@ -9,3 +9,7 @@
 .plyr--full-ui input[type="range"] {
     color: #222;
 }
+
+.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded='true'] {
+    background: transparent;
+}

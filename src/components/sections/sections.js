@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-
-import BtnDefault from '../../ui/btnDefault';
+import Preloader from '../preloader/preloader';
+import BtnDefault from '../../ui/buttons/btnDefault';
+import { getAsyncPosts } from '../../actions/actions';
 
 import "./_sections.scss";
 
@@ -24,6 +25,19 @@ class Sections extends React.Component {
         )
     }
 
+    toUpWindow() {
+        // setTimeout(() => (window.scroll({ top: 0, left: 0, behavior: 'smooth' })), 600)
+        window.scroll({ top: 0, left: 0 });
+    }
+
+    createMarkup(arg) {
+        return { __html: arg };
+    }
+
+    componentDidMount() {
+
+    }
+
     render() {
 
         return (
@@ -36,31 +50,59 @@ class Sections extends React.Component {
                         <div uk-grid="true" className="uk-grid-match">
 
                             {
-                                this.props.dataPosts ?
-                                    this.props.dataPosts.map((item, i) => {
+                                this.props.dataPosts.films ?
+
+                                    this.props.dataPosts.films.map((item, i) => {
 
                                         return (
                                             <div
                                                 className="uk-width-1-5@m"
-                                                key={item.thumbnailUrl}
+                                                key={item.id}
                                             >
-                                                <div className="uk-card uk-card-default uk-card-body tb-card-body"
-                                                    // style={{ backgroundImage: `url(${item.url})` }}
-                                                >
+                                                <Link onClick={() => (this.toUpWindow())}
+                                                    to={`/view/${this.props.dataPosts.slug}/${item.id}/${item.slug}`}
+                                                    className="uk-card uk-card-default uk-card-body tb-card-body"
+                                                //  style={{ backgroundImage: `url(${item.url})` }}
+                                                ></Link>
+
+                                                <div className="uk-margin-small-bottom">
+                                                    <Link onClick={() => (this.toUpWindow())} className="tb-link" to={`/view/${this.props.dataPosts.slug}/${item.id}/${item.slug}`}>{item.title}</Link>
                                                 </div>
+
                                                 <div>
-                                                    {/* <Link className="tb-link" to={"page/" + item.id}>{item.title}</Link> */}
-                                                    <Link className="tb-link" to={"page/" + item.id}>Описание серии</Link>
+                                                    <span
+                                                        className="tb-tooltip-box"
+                                                        uk-tooltip="title: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum vel laborum itaque dolor adipisci voluptates quae inventore est ad dolores?; pos: top-left"
+                                                        dangerouslySetInnerHTML={this.createMarkup(item.description)}
+                                                    >
+                                                    </span>
                                                 </div>
+
                                             </div>
                                         )
-                                    }) : null
+                                    })
+
+                                    :
+
+                                    <div className="uk-text-secondary">
+                                        <p>На стадии заполнения...</p>
+                                    </div>
                             }
 
                         </div>
 
                         <div className="uk-flex-center" uk-grid="true">
-                            <BtnDefault name="Показать еще..." getPosts={this.props.getPosts} />
+
+                            {
+                                this.props.viewBtnLoader ?
+                                    <BtnDefault name="Показать все"
+                                        genres={this.props}
+                                        getAll={this.props.getAsyncPostsHandler}
+                                    />
+                                    :
+                                    null
+                            }
+
                         </div>
 
                     </div>
@@ -70,6 +112,16 @@ class Sections extends React.Component {
     }
 }
 
-const mapStateToProps = props => (props);
+const mapStateToProps = props => {
+    return props;
+};
 
-export default connect(mapStateToProps, null)(Sections);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getAsyncPostsHandler: (slug, count) => {
+            dispatch(getAsyncPosts(slug, count));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sections);

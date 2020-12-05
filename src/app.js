@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Navbar from './components/navbar/navbar';
 import Footer from './components/footer';
+import './app.scss';
 
 class App extends React.Component {
 

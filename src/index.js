@@ -10,7 +10,12 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
 import uikit from '../node_modules/uikit/dist/js/uikit.js';
+
 import '../node_modules/uikit/dist/css/uikit.css';
+import '../node_modules/material-icons/iconfont/material-icons.scss';
+
+
+
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -24,7 +29,7 @@ ReactDOM.render(
     </BrowserRouter>
   </Provider>
   ,
-  document.getElementById('tube')
+  document.getElementById('itvi')
 );
 
 serviceWorker.unregister();
