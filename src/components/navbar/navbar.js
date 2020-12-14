@@ -5,8 +5,8 @@ import Home from '../../pages/home';
 import Films from '../../pages/films';
 import Serials from '../../pages/serials';
 import Anime from '../../pages/anime';
-import View from '../../pages/view';
-import { getAsyncPosts } from '../../actions/actions';
+import View from '../../pages/vf';
+import { getAsyncPosts, getAsyncFilms } from '../../actions/actions';
 
 import './_navbar.scss';
 
@@ -33,15 +33,15 @@ class Navbar extends React.Component {
                                     <ul className="uk-navbar-nav">
                                         <li className="link-home uk-active"
                                             onClick={() => {
-                                                this.props.getAsyncPostsHandler('popular');
+                                                // this.props.getAsyncPostsHandler();
                                             }}
                                         ><Link to="/">goivi</Link></li>
                                         <li
                                             onClick={() => {
-                                                this.props.getAsyncPostsHandler('filmy');
+                                                this.props.getAsyncFilmsHandler();
                                             }}
                                         ><Link to="/films">Фильмы</Link></li>
-                                        <li
+                                        {/* <li
                                             onClick={() => {
                                                 this.props.getAsyncPostsHandler('serialy');
                                             }}
@@ -50,7 +50,7 @@ class Navbar extends React.Component {
                                             onClick={() => {
                                                 this.props.getAsyncPostsHandler('anime');
                                             }}
-                                        ><Link to="/anime">Аниме</Link></li>
+                                        ><Link to="/anime">Аниме</Link></li> */}
                                     </ul>
                                 </div>
                             </nav>
@@ -61,9 +61,9 @@ class Navbar extends React.Component {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/films" component={Films} />
-                    <Route path="/serials" component={Serials} />
-                    <Route path="/anime" component={Anime} />
-                    <Route path="/view/:cat/:id/:slug" component={View} />
+                    {/* <Route path="/serials" component={Serials} />
+                    <Route path="/anime" component={Anime} /> */}
+                    <Route path="/vf/:genre/:id/:slug" component={View} />
                 </Switch>
 
             </Router>
@@ -80,6 +80,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getAsyncPostsHandler: (count) => {
             dispatch(getAsyncPosts(count));
+        },
+        getAsyncFilmsHandler: (count) => {
+            dispatch(getAsyncFilms(count));
         }
     };
 };

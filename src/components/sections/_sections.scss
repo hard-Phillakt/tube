@@ -18,17 +18,12 @@
         }
     }
 
-    &-card-body {
-        height: 270px;
-        background: #666 !important;
-    }
-
     &-link {
         overflow: hidden;
         max-height: 54px;
         margin: 5px 0 0;
-        font-size: 15px;
-        font-weight: 100;
+        font-size: 1rem;
+        font-weight: 600;
         line-height: 18px;
         color: #333;
 
@@ -54,4 +49,24 @@
     color: #000 !important;
     background: #fff !important;
     border-radius: 0 !important;
+    padding: 15px !important;
+    box-shadow: 2px 3px 10px 1px #00000066;
+}
+
+.uk-tooltip .uk-tooltip-inner {
+
+    p {
+        margin: 0;
+    }
+}
+
+
+.uk-card {
+
+
+    &-film {
+        padding: 40px 40px;
+        height: 270px;
+        background-size: cover;
+    }
 }

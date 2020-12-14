@@ -1,5 +1,60 @@
 import timer from '../components/_timer/timer';
 
+
+//  Получить категории с фильмами
+const getFilmsAction = (films) => {
+    return {
+        type: 'GET_FILMS',
+        films
+    }
+}
+
+export const getAsyncFilms = (param, count) => {
+
+    return (dispatch) =>
+        fetch('http://tube-serv/api/v1/films-genres?expand=films_to_genres')
+            .then(response => response.json())
+            .then(json => {
+                if (json) {
+
+                    const genres_list = {
+                        items: []
+                    };
+
+                    // json.items.forEach((item, i) => {
+
+                        // console.log(json.items);
+
+                    //     //  Фильтруем категории по жанрам 
+                    //     // if (item.genres[0].slug === param) {
+                            
+                    //     //     //  если в категории есть посты 
+                    //     //     if(item.films.length){
+                    //     //         item.films = item.films.splice(0, count ? count : 3);
+                    //     //     }
+                            
+                    //     //     genres_list.items.push(item);
+                    //     // }
+                    // });
+
+                    if (json.items.length) {
+                        dispatch(getFilmsAction(json.items));
+                    }else {
+                        dispatch(getFilmsAction(genres_list.items = false));
+                    }
+                }
+            });
+}
+
+
+
+
+
+
+
+
+
+
 //  Получить категории с фильмами
 const getPostsAction = (posts) => {
     return {

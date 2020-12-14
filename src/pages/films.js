@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Section from '../components/sections/sections';
+import SectionFilms from '../components/sections/sectionsFilms';
 import Preloader from '../components/preloader/preloader';
-import { getAsyncPosts } from '../actions/actions';
+import { getAsyncFilms } from '../actions/actions';
 
 
 class Films extends React.Component {
@@ -13,7 +13,7 @@ class Films extends React.Component {
 
   componentDidMount() {
 
-    this.props.getAsyncPostsHandler('filmy');
+    this.props.getAsyncFilmsHandler();
   }
 
   render() {
@@ -23,17 +23,18 @@ class Films extends React.Component {
 
         {
 
-          this.props.posts.data.items ?
+          this.props.films.filmsAllFromAllGenres ?
 
-            this.props.posts.data.items.map((item, i) => {
+            this.props.films.filmsAllFromAllGenres.map((item, i) => {
 
               return (
                 //  Делаем рендер компонента и проверяем наличие постов в категории
-                <Section 
+                <SectionFilms 
                 title={item.title} 
                 key={item.title} 
-                dataPosts={item.films.length ? item : false} 
-                viewBtnLoader={item.films.length ? true : false}/>
+                filmsGenres={item ? item : false} 
+                viewBtnLoader={item ? true : false}
+                />
               )
 
             })
@@ -54,8 +55,8 @@ const mapStateToProps = props => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAsyncPostsHandler: (count) => {
-      dispatch(getAsyncPosts(count));
+    getAsyncFilmsHandler: (count) => {
+      dispatch(getAsyncFilms(count));
     }
   };
 };
