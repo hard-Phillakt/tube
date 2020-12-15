@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { getAsyncPosts } from '../actions/actions';
 import { Link } from "react-router-dom";
-import { getAsyncPostbyIdAction } from '../actions/actions';
+// import { getAsyncPostbyIdAction } from '../actions/actions';
+import { getAsyncFilmbyIdAction } from '../actions/actionsFilms';
+import Hls from '../../node_modules/hls.js';
 
 
 //  Player 
-import Plyr from 'plyr';
-import "../components/plyr/sass/plyr.scss";
-import "../components/plyr/sass/_custom.scss";
+// import Plyr from 'plyr';
+// import "../components/plyr/sass/plyr.scss";
+// import "../components/plyr/sass/_custom.scss";
 
 //  Slider
 import SliderDefault from '../components/sliders/sliderDefault';
@@ -21,25 +23,48 @@ class View extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.myPlyr = React.createRef();
+        this.RefPlayer = React.createRef();
 
-        // if (this.props.posts.currentPost) {
-        //     this.props.posts.currentPost = undefined;
+        // if (this.props.films.filmsCurrent) {
+        //     this.props.films.filmsCurrent = undefined;
         // }
     }
 
     componentDidMount() {
 
-        // this.plyr = new Plyr(`#${this.myPlyr.current.id}`, {
+        // console.log('componentDidMount');
+
+        // console.log(this.props.films.filmsCurrent);
+
+        // if(this.props.films.filmsCurrent){
+        // console.log('da');
+
+        // }else {
+        //     console.log('net');
+        // }
+
+        // this.plyr = new Plyr(`#${this.RefPlayer.current.id}`, {
         //     controls: ['play', 'progress', 'current-time', 'volume', 'fullscreen']
         // });
 
         //  Длаем выборку ajax фильма по id
-        // this.props.setAsyncPostbyIdAction(this.props.match.params);
+        this.props.setAsyncFilmbyIdAction(this.props.match.params);
 
-        console.log(this.props.match);
+        // console.log(this.props.match);
 
     }
+
+    filmPlay() {
+        const videoSrc = this.props.films.filmsCurrent.proxy_url_video + "/" + this.props.films.filmsCurrent.original_url_video;
+
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(this.RefPlayer.current);
+            this.RefPlayer.current.play();
+        }
+    }
+
 
     createMarkup(arg) {
         return { __html: arg };
@@ -64,13 +89,23 @@ class View extends React.Component {
                     </ul>
 
                     <h1>
-                        
+
                     </h1>
                     <div className="uk-card uk-card-default uk-grid-collapse uk-child-width-1-1@s uk-margin" uk-grid="true">
 
                         <div className="uk-card-media-left uk-cover-container">
 
-
+                            {
+                                this.props.films.filmsCurrent ?
+                                    <video
+                                        onClick={() => (this.filmPlay(this.props.films.filmsCurrent))}
+                                        id={"player_" + this.props.films.filmsCurrent.id} playsInline controls ref={this.RefPlayer}
+                                        style={{ width: `100%` }}
+                                    >
+                                    </video>
+                                    :
+                                    <video id="preloader" style={{ visibility: 'hidden' }} ref={this.RefPlayer}></video>
+                            }
 
                         </div>
 
@@ -81,7 +116,7 @@ class View extends React.Component {
                             <div>
                                 <div className="uk-card-body">
                                     <h3 className="uk-card-title">
-                                       
+
                                     </h3>
 
 
@@ -121,14 +156,14 @@ class View extends React.Component {
 }
 
 const mapStateToProps = (props) => {
-    // console.log("view: ", props);
+    // console.log("vf: ", props.films.filmsCurrent);
     return props;
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setAsyncPostbyIdAction: (count) => {
-            dispatch(getAsyncPostbyIdAction(count));
+        setAsyncFilmbyIdAction: (param) => {
+            dispatch(getAsyncFilmbyIdAction(param));
         }
     };
 };

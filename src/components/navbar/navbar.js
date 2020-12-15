@@ -6,7 +6,8 @@ import Films from '../../pages/films';
 import Serials from '../../pages/serials';
 import Anime from '../../pages/anime';
 import View from '../../pages/vf';
-import { getAsyncPosts, getAsyncFilms } from '../../actions/actions';
+// import { getAsyncPosts, getAsyncFilms } from '../../actions/actions';
+import { getAsyncFilms } from '../../actions/actionsFilms';
 
 import './_navbar.scss';
 
@@ -78,9 +79,9 @@ const mapStateToProps = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAsyncPostsHandler: (count) => {
-            dispatch(getAsyncPosts(count));
-        },
+        // getAsyncPostsHandler: (count) => {
+        //     dispatch(getAsyncPosts(count));
+        // },
         getAsyncFilmsHandler: (count) => {
             dispatch(getAsyncFilms(count));
         }

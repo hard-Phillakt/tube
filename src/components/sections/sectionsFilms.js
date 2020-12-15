@@ -57,7 +57,7 @@ class Sections extends React.Component {
                                         return (
                                             <div
                                                 className="uk-width-1-6@m"
-                                                uk-tooltip={"title: " + item.description + "; pos: top-right; delay: 1500"}
+                                                uk-tooltip={"title: " + item.description + "; pos: right-top; delay: 500"}
                                                 key={item.id}
                                             >
                                                 <Link onClick={() => (this.toUpWindow())}

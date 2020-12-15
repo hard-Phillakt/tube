@@ -17,6 +17,13 @@ const films = (state = stateInit, action) => {
                 filmsAllFromAllGenres
             };
 
+        case "GET_FILM_BY_ID":
+
+            return {
+                ...state,
+                filmsCurrent: action.currentFilm
+            };
+
         default:
 
             return {
