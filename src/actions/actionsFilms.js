@@ -59,10 +59,10 @@ const getFilmbyIdAction = (currentFilm) => {
 export const getAsyncFilmbyIdAction = (params) => {
 
     return (dispatch) =>
-        fetch(`http://tube-serv/api/v1/films/${params.id}`)
+        fetch(`http://tube-serv/api/v1/films/${params.id_films}`)
             .then(response => response.json())
             .then(json => {
-                if(json.slug === params.slug){
+                if (json.slug === params.slug) {
                     dispatch(getFilmbyIdAction(json));
                 }
             });
@@ -71,66 +71,90 @@ export const getAsyncFilmbyIdAction = (params) => {
 
 
 
-
-
+// 3.
 //  Получить все фильмы из категории без текущего фильма в слайдер
-const getMovAllFromCatAction = (allFilms) => {
+const getAllFilmsFromGenreAction = (filmsFromIdGenre) => {
     return {
-        type: 'GET_MOV_ALL_FROM_CAT',
-        allFilms
+        type: 'GET_ALL_FILMS_FROM_ID_GENRE',
+        filmsFromIdGenre
     }
 }
 
-export const getAsyncMovAllFromCatAction = (params) => {
+export const getAsyncAllFilmsFromGenreAction = (params) => {
+
+    // {id_genre: "3", genre: "boevik", id_films: "1", slug: "varkraft"}
 
     return (dispatch) =>
-        fetch('http://tube-serv/api/v1/cats?expand=films')
+        fetch(`http://tube-serv/api/v1/films-genres/${params.id_genre}?expand=films_to_genres`)
             .then(response => response.json())
             .then(json => {
 
-                json.items.forEach((cat, i) => {
-                    if (cat.slug === params.cat) {
-                        let allFilms = [];
+                let filmsFromIdGenre = [];
 
-                        cat.films.find((item) => {
-                            if (item.id !== parseInt(params.id)) {
-                                allFilms.push(item);
-                            }
-                        })
-
-                        dispatch(getMovAllFromCatAction(allFilms));
+                json.films_to_genres.find((item, i) => {
+                    if (item.id != params.id_films) {
+                        filmsFromIdGenre.push(item);
                     }
                 });
+
+                dispatch(getAllFilmsFromGenreAction(filmsFromIdGenre));
+
+                // json.films_to_genres.forEach((item, i) => {
+
+                //     // if (cat.slug === params.cat) {
+                //     //     let allFilms = [];
+
+                //     //     cat.films.find((item) => {
+                //     //         if (item.id !== parseInt(params.id)) {
+                //     //             allFilms.push(item);
+                //     //         }
+                //     //     })
+
+                //     //     dispatch(getAllFilmsFromGenreAction(allFilms));
+                //     // }
+
+                // });
+
             });
 }
 
+
+
+
+
+// 4.
 //  Получить фильм по id из слайдера
-const getPostbyIdFromSliderAction = (currentPost) => {
+const getFilmByIdFromSliderAction = (currentFilm) => {
     return {
-        type: 'GET_POST_BY_ID_FROM_SLIDER',
-        currentPost
+        type: 'GET_FILM_BY_ID_FROM_SLIDER',
+        currentFilm
     }
 }
 
-export const getAsyncPostbyIdFromSliderAction = (params) => {
-
-    return (dispatch) =>
-        fetch(`http://tube-serv/api/v1/cats?expand=films`)
+export const getAsyncFilmByIdFromSliderAction = (id) => {
+    return (dispatch) => {
+        fetch(`http://tube-serv/api/v1/films/${id}`)
             .then(response => response.json())
             .then(json => {
-                json.items.forEach((cat, i) => {
-                    if (cat.slug === params.cat) {
-                        cat.films.forEach((film, i) => {
-                            if (film.id === parseInt(params.id)) {
-                                dispatch(getPostbyIdFromSliderAction(film));
-                            }
-                        })
-                    }
-                });
 
+                if (json.id === id) {
+                    dispatch(getFilmByIdFromSliderAction(json));
+                }
             });
+    }
 }
 
 
 
 
+
+
+// 5.
+// Состояник кнопки Play при переключении фильмов
+
+export const getStateBntPlay = (stateBnt) => {
+    return {
+        type: 'STATE_BTN_PLAY',
+        stateBnt
+    }
+}

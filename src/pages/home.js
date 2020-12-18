@@ -24,9 +24,9 @@ class Home extends React.Component {
       <section className="home">
         {
 
-          this.props.posts.data.items ?
+          this.props.films.filmsAllFromAllGenres ?
 
-            this.props.posts.data.items.map((item, i) => {
+          this.props.films.filmsAllFromAllGenres.map((item, i) => {
 
               return (
                 <Section title={item.title} key={item.title} dataPosts={item} />

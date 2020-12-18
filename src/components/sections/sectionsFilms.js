@@ -61,18 +61,20 @@ class Sections extends React.Component {
                                                 key={item.id}
                                             >
                                                 <Link onClick={() => (this.toUpWindow())}
-                                                    to={`/vf/${this.props.filmsGenres.slug}/${item.id}/${item.slug}`}
+                                                    to={`/vf/${this.props.filmsGenres.id}/${this.props.filmsGenres.slug}/${item.id}/${item.slug}`}
                                                     className="uk-card uk-card-default uk-card-film"
                                                     style={{
                                                         backgroundImage: `url(http://tube-serv${item.poster_img})`,
                                                         backgroundSize: 'cover'
                                                         }}
                                                     >
+
                                                     {/* <img src={"http://tube-serv" + item.poster_img} uk-img/> */}
+                                                    
                                                 </Link>
 
                                                 <div className="uk-margin-small-top">
-                                                    <Link onClick={() => (this.toUpWindow())} className="tb-link" to={`/vf/${this.props.filmsGenres.slug}/${item.id}/${item.slug}`}>{item.title}</Link>
+                                                    <Link onClick={() => (this.toUpWindow())} className="tb-link" to={`/vf/${this.props.filmsGenres.id}/${this.props.filmsGenres.slug}/${item.id}/${item.slug}`}>{item.title}</Link>
                                                 </div>
 
                                                 {/* <div>
@@ -83,6 +85,7 @@ class Sections extends React.Component {
                                                     >
                                                     </span>
                                                 </div> */}
+                                                
                                             </div>
                                         )
                                     })

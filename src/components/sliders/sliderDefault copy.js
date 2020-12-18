@@ -8,14 +8,14 @@ import './_sliderDefault.scss';
 
 
 //  Player 
-import Plyr from 'plyr';
+// import Plyr from 'plyr';
 
 
 class SliderDefault extends React.Component {
 
     componentDidMount() {
         // Выводим остальные фильмы из категории в слайдер
-        this.props.setAsyncMovAllFromCatAction(this.props.matchparam);
+        // this.props.setAsyncMovAllFromCatAction(this.props.matchparam);
     }
 
     createMarkup(arg) {
@@ -49,7 +49,7 @@ class SliderDefault extends React.Component {
 
                                                     <Link onClick={() => {
 
-                                                        // this.props.plyr.current.stop();
+                                                        this.props.plyr.current.stop();
 
 
                                                         this.toUpWindow();
@@ -67,8 +67,8 @@ class SliderDefault extends React.Component {
 
                                                         console.log(this.props.plyr.current);
 
-                                                        // this.props.plyr.current.load();
-                                                        // this.props.plyr.current.destroy();
+                                                        this.props.plyr.current.load();
+                                                        this.props.plyr.current.destroy();
 
                                                     }}
                                                         to={`/view/${this.props.matchparam.cat}/${item.id}/${item.slug}`}
@@ -79,12 +79,12 @@ class SliderDefault extends React.Component {
 
                                                     <div>
                                                         <div className="uk-margin-small-bottom">
-                                                            <Link
+                                                            {/* <Link
                                                                 to={`/view/${this.props.matchparam.cat}/${item.id}/${item.slug}`}
                                                                 className="tb-link"
                                                             >
                                                                 {item.title}
-                                                            </Link>
+                                                            </Link> */}
                                                         </div>
 
                                                         <div>

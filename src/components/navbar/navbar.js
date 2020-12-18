@@ -64,7 +64,7 @@ class Navbar extends React.Component {
                     <Route path="/films" component={Films} />
                     {/* <Route path="/serials" component={Serials} />
                     <Route path="/anime" component={Anime} /> */}
-                    <Route path="/vf/:genre/:id/:slug" component={View} />
+                    <Route path="/vf/:id_genre/:genre/:id_films/:slug" component={View} />
                 </Switch>
 
             </Router>
