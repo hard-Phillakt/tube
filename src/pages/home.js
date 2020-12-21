@@ -13,7 +13,7 @@ class Home extends React.Component {
 
   componentDidMount() {
 
-    this.props.getAsyncPostsHandler('popular');
+    // this.props.getAsyncPostsHandler('popular');
   }
 
   render() {

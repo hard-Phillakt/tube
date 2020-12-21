@@ -7,7 +7,7 @@ import Serials from '../../pages/serials';
 import Anime from '../../pages/anime';
 import View from '../../pages/vf';
 // import { getAsyncPosts, getAsyncFilms } from '../../actions/actions';
-import { getAsyncFilms } from '../../actions/actionsFilms';
+import { getAsyncFilms, getStateBntPlay } from '../../actions/actionsFilms';
 
 import './_navbar.scss';
 
@@ -35,11 +35,13 @@ class Navbar extends React.Component {
                                         <li className="link-home uk-active"
                                             onClick={() => {
                                                 // this.props.getAsyncPostsHandler();
+                                                this.props.getAsyncFilmsHandler();
                                             }}
                                         ><Link to="/">goivi</Link></li>
                                         <li
                                             onClick={() => {
                                                 this.props.getAsyncFilmsHandler();
+                                                this.props.setStateBntPlay(true);
                                             }}
                                         ><Link to="/films">Фильмы</Link></li>
                                         {/* <li
@@ -84,6 +86,9 @@ const mapDispatchToProps = (dispatch) => {
         // },
         getAsyncFilmsHandler: (count) => {
             dispatch(getAsyncFilms(count));
+        },
+        setStateBntPlay: (param) => {
+            dispatch(getStateBntPlay(param));
         }
     };
 };

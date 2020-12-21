@@ -96,6 +96,7 @@ class View extends React.Component {
                             {
                                 this.props.films.filmsCurrent ?
                                     <div className="vf-wrap vf-wrap__player">
+
                                         <video
                                             className="video-js vjs-theme-city"
                                             // id={"player_" + this.props.films.filmsCurrent.id}
@@ -107,26 +108,32 @@ class View extends React.Component {
                                         >
                                         </video>
 
-                                        <div className="vf-btn-play"
-                                            ref={this.RefPlayerBtnPlay}
-                                            style={{
-                                                display: this.props.films.btnViewPlay ? 'flex' : 'none',
-                                                // background: "#444" 
-                                            }}
-                                            onClick={() => {
-                                                this.filmPlay();
+                                        {  
+                                            this.props.films.btnViewPlay ?
 
-                                                this.props.setStateBntPlay(false);
-                                            }}>
+                                            <div className="vf-btn-play"
+                                                ref={this.RefPlayerBtnPlay}
+                                                style={{
+                                                    // display: this.props.films.btnViewPlay ? 'flex' : 'none',
+                                                    background: "#444" 
+                                                }}
+                                                onClick={() => {
+                                                    this.filmPlay();
+                                                    this.props.setStateBntPlay(false);
+                                                }}>
 
-                                            <span className="material-icons">
-                                                play_arrow
-                                            </span>
-                                        </div>
+                                                <span className="material-icons">
+                                                    play_arrow
+                                                </span>
+                                            </div>
+                                            : 
+                                            null
+                                        }
 
                                     </div>
                                     :
-                                    <div></div>
+                                    
+                                    null
                             }
 
                         </div>

@@ -1,4 +1,6 @@
 // import timer from '../components/_timer/timer';
+let _ = require('lodash');
+
 
 // 1.
 //  Получить категории с фильмами
@@ -17,30 +19,17 @@ export const getAsyncFilms = (param, count) => {
             .then(json => {
                 if (json) {
 
-                    const genres_list = {
-                        items: []
-                    };
-
-                    // json.items.forEach((item, i) => {
-
-                    // console.log(json.items);
-
-                    //     //  Фильтруем категории по жанрам 
-                    //     // if (item.genres[0].slug === param) {
-
-                    //     //     //  если в категории есть посты 
-                    //     //     if(item.films.length){
-                    //     //         item.films = item.films.splice(0, count ? count : 3);
-                    //     //     }
-
-                    //     //     genres_list.items.push(item);
-                    //     // }
-                    // });
+                    // Рандомная сортировка массива 
+                    json.items.forEach((item, i) => {
+                        if(item.films_to_genres.length){
+                            item.films_to_genres = _.shuffle(item.films_to_genres);
+                        }
+                    });
 
                     if (json.items.length) {
                         dispatch(getFilmsAction(json.items));
                     } else {
-                        dispatch(getFilmsAction(genres_list.items = false));
+                        dispatch(getFilmsAction(json.items.items = false));
                     }
                 }
             });
@@ -67,7 +56,6 @@ export const getAsyncFilmbyIdAction = (params) => {
                 }
             });
 }
-
 
 
 
@@ -120,8 +108,6 @@ export const getAsyncAllFilmsFromGenreAction = (params) => {
 
 
 
-
-
 // 4.
 //  Получить фильм по id из слайдера
 const getFilmByIdFromSliderAction = (currentFilm) => {
@@ -143,9 +129,6 @@ export const getAsyncFilmByIdFromSliderAction = (id) => {
             });
     }
 }
-
-
-
 
 
 
