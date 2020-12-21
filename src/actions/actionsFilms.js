@@ -58,7 +58,6 @@ export const getAsyncFilmbyIdAction = (params) => {
 }
 
 
-
 // 3.
 //  Получить все фильмы из категории без текущего фильма в слайдер
 const getAllFilmsFromGenreAction = (filmsFromIdGenre) => {
@@ -80,7 +79,7 @@ export const getAsyncAllFilmsFromGenreAction = (params) => {
                 let filmsFromIdGenre = [];
 
                 json.films_to_genres.find((item, i) => {
-                    if (item.id != params.id_films) {
+                    if (parseInt(item.id) !== parseInt(params.id_films)) {
                         filmsFromIdGenre.push(item);
                     }
                 });
@@ -107,7 +106,6 @@ export const getAsyncAllFilmsFromGenreAction = (params) => {
 }
 
 
-
 // 4.
 //  Получить фильм по id из слайдера
 const getFilmByIdFromSliderAction = (currentFilm) => {
@@ -131,10 +129,8 @@ export const getAsyncFilmByIdFromSliderAction = (id) => {
 }
 
 
-
 // 5.
 // Состояник кнопки Play при переключении фильмов
-
 export const getStateBntPlay = (stateBnt) => {
     return {
         type: 'STATE_BTN_PLAY',

@@ -7,9 +7,9 @@ import { getAsyncPosts } from '../actions/actions';
 
 class Anime extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
 

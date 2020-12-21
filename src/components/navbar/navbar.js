@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import Home from '../../pages/home';
 import Films from '../../pages/films';
-import Serials from '../../pages/serials';
-import Anime from '../../pages/anime';
+// import Serials from '../../pages/serials';
+// import Anime from '../../pages/anime';
 import View from '../../pages/vf';
-// import { getAsyncPosts, getAsyncFilms } from '../../actions/actions';
+import { getAsyncFilmsAllAction } from '../../actions/actionsHomes';
 import { getAsyncFilms, getStateBntPlay } from '../../actions/actionsFilms';
 
 import './_navbar.scss';
@@ -34,16 +34,17 @@ class Navbar extends React.Component {
                                     <ul className="uk-navbar-nav">
                                         <li className="link-home uk-active"
                                             onClick={() => {
-                                                // this.props.getAsyncPostsHandler();
-                                                this.props.getAsyncFilmsHandler();
+                                                this.props.setAsyncFilmsAllAction();
                                             }}
                                         ><Link to="/">goivi</Link></li>
                                         <li
                                             onClick={() => {
-                                                this.props.getAsyncFilmsHandler();
+                                                this.props.setAsyncFilmsHandler();
                                                 this.props.setStateBntPlay(true);
                                             }}
                                         ><Link to="/films">Фильмы</Link></li>
+
+
                                         {/* <li
                                             onClick={() => {
                                                 this.props.getAsyncPostsHandler('serialy');
@@ -81,10 +82,10 @@ const mapStateToProps = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getAsyncPostsHandler: (count) => {
-        //     dispatch(getAsyncPosts(count));
-        // },
-        getAsyncFilmsHandler: (count) => {
+        setAsyncFilmsAllAction: (param) => {
+            dispatch(getAsyncFilmsAllAction(param));
+        },
+        setAsyncFilmsHandler: (count) => {
             dispatch(getAsyncFilms(count));
         },
         setStateBntPlay: (param) => {

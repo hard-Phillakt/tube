@@ -1,5 +1,6 @@
 
 const stateInit = {
+    filmsAll: [],
     filmsAllFromAllGenres: [],
     filmsCurrent: {},
     filmsFromIdGenre: [],
@@ -9,6 +10,16 @@ const stateInit = {
 const films = (state = stateInit, action) => {
 
     switch (action.type) {
+
+        case "GET_FILMS_ALL":
+
+            const filmsAll = action.filmsAll;
+
+            return {
+                ...state,
+                filmsAll
+            };
+
         case "GET_FILMS":
 
             const filmsAllFromAllGenres = action.films;

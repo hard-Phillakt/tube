@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import Preloader from '../preloader/preloader';
+// import Preloader from '../preloader/preloader';
 import BtnDefault from '../../ui/buttons/btnDefault';
 import { getAsyncPosts } from '../../actions/actions';
 
 import "./_sections.scss";
 
-class Sections extends React.Component {
+class SectionsFilms extends React.Component {
 
 
     getTitle() {
@@ -132,4 +132,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sections);
+export default connect(mapStateToProps, mapDispatchToProps)(SectionsFilms);

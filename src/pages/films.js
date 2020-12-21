@@ -7,9 +7,9 @@ import { getAsyncFilms } from '../actions/actions';
 
 class Films extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
 

@@ -1,4 +1,4 @@
-import timer from '../components/_timer/timer';
+// import timer from '../components/_timer/timer';
 
 
 //  Получить категории с фильмами

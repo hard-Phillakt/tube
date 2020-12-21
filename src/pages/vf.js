@@ -72,7 +72,7 @@ class View extends React.Component {
                     <div className="uk-container uk-container-small uk-margin-top">
 
                         <div className="uk-column-1-2@s uk-column-1-3@m uk-column-1-4@l">
-                            <img src={"http://tube-serv" + this.props.films.filmsCurrent.poster_img} />
+                            <img src={"http://tube-serv" + this.props.films.filmsCurrent.poster_img} alt={this.props.films.filmsCurrent.slug} />
                             <div className="uk-article-meta">
                                 <p>Оригинальное название: {this.props.films.filmsCurrent.original_title}</p>
                                 <p dangerouslySetInnerHTML={this.createMarkup("Слоган: " + this.props.films.filmsCurrent.tagline)}></p>
