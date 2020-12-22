@@ -42,7 +42,7 @@ class Navbar extends React.Component {
                                                 this.props.setAsyncFilmsHandler();
                                                 this.props.setStateBntPlay(true);
                                             }}
-                                        ><Link to="/films">Фильмы</Link></li>
+                                        ><Link to="/films">Фильмы по жанрам</Link></li>
 
 
                                         {/* <li
@@ -55,6 +55,7 @@ class Navbar extends React.Component {
                                                 this.props.getAsyncPostsHandler('anime');
                                             }}
                                         ><Link to="/anime">Аниме</Link></li> */}
+                                        
                                     </ul>
                                 </div>
                             </nav>
