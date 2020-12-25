@@ -1,17 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SectionsHome from '../components/sections/sectionsHome';
-import { getAsyncFilmsAllAction } from '../actions/actionsHomes';
+import SectionsHomeFilter from '../components/sections/sectionsHomeFilter';
+import { 
+  getAsyncFilmsAllAction, 
+  getAsyncFilms, 
+  getAsyncFilterFilmsFromGenres
+ } from '../actions/actionsHomes';
+
 import Preloader from '../components/preloader/preloader';
 
 class Home extends React.Component {
 
   // constructor(props) {
   //   super(props);
+
   // }
 
   componentDidMount() {
     this.props.setAsyncFilmsAllAction();
+
+    this.props.getAsyncFilmsHandler();
   }
 
   render() {
@@ -30,45 +39,9 @@ class Home extends React.Component {
                 uk-padding-remove-top
                 tb-title__h1
                 ">
-              <span>Новинки</span>
+              <span>Премьеры</span>
             </h1>
 
-            <div className="uk-card uk-card-secondary uk-card-body uk-margin-medium-bottom">
-
-              <div class="uk-column-1-2@s uk-column-1-3@m uk-column-1-4@l">
-
-                <div>
-                  <label><input className="uk-checkbox uk-margin-small-right" type="checkbox" /> КОМЕДИЯ</label>
-                </div>
-
-                <div>
-                  <label><input className="uk-checkbox uk-margin-small-right" type="checkbox" /> УЖАСЫ</label>
-                </div>
-
-                <div>
-                  <label><input className="uk-checkbox uk-margin-small-right" type="checkbox" /> КОМЕДИЯ</label>
-                </div>
-
-                <div>
-                  <label><input className="uk-checkbox uk-margin-small-right" type="checkbox" /> УЖАСЫ</label>
-                </div>
-
-                <div>
-                  <label><input className="uk-checkbox uk-margin-small-right" type="checkbox" /> УЖАСЫ</label>
-                </div>
-
-                <div>
-                  <label><input className="uk-checkbox uk-margin-small-right" type="checkbox" /> УЖАСЫ</label>
-                </div>
-
-                <div>
-                  <label><input className="uk-checkbox uk-margin-small-right" type="checkbox" /> УЖАСЫ</label>
-                </div>
-              </div>
-
-
-
-            </div>
 
             <div className="uk-child-width-1-1@m" uk-grid="true">
 
@@ -92,6 +65,89 @@ class Home extends React.Component {
               </div>
 
             </div>
+
+
+            <h2 className="
+                uk-heading-line 
+                uk-heading-medium 
+                uk-padding 
+                uk-padding-remove-left
+                uk-padding-remove-top
+                tb-title__h1
+                ">
+              <span>Фильтр</span>
+            </h2>
+
+            <div className="uk-card uk-card-secondary uk-card-body uk-margin-medium-bottom">
+
+              <div className="uk-column-1-2@s uk-column-1-3@m uk-column-1-4@l">
+
+                {
+
+                  this.props.films.filmsAllFromAllGenres ?
+
+                    this.props.films.filmsAllFromAllGenres.map((item, i) => {
+
+                      return (
+
+                        <div className="uk-flex"
+                          key={item.slug}
+                        >
+                          <label>
+                            <input className="uk-radio uk-margin-small-right" type="radio" name="failter-films-for-genres"
+                              onChange={() => {
+
+                                // console.log(item);
+
+                                this.props.setAsyncFilterFilmsFromGenres(item);
+
+                              }}
+                            /> {item.title}
+                          </label>
+                        </div>
+
+                      )
+
+                    })
+                    :
+                    null
+                }
+
+              </div>
+
+            </div>
+
+            <div className="uk-child-width-1-1@m" uk-grid="true">
+
+              {/* Фильмы по фильтру */}
+
+              <div className="uk-child-width-1-5@m uk-grid-match" uk-grid="true">
+                {
+
+                  this.props.films.filterFilmsFromGenresHome ?
+
+                    this.props.films.filterFilmsFromGenresHome.map((item, i) => {
+
+                      return (
+
+                        <div
+                          key={item.slug}
+                        >
+
+                        <SectionsHomeFilter />
+
+                        </div>
+
+                      )
+
+                    })
+                    :
+                    <Preloader />
+                }
+              </div>
+
+            </div>
+
           </div>
 
           <div className="uk-section">
@@ -109,7 +165,7 @@ class Home extends React.Component {
               </h2>
 
               <div className="uk-child-width-1-1@m">
-                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="true">
+                <div className="uk-position-relative uk-visible-toggle uk-light" uk-slider="true">
 
                   <ul className="uk-slider-items uk-child-width-1-2 uk-child-width-1-5@m uk-grid">
 
@@ -179,6 +235,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setAsyncFilmsAllAction: () => {
       dispatch(getAsyncFilmsAllAction());
+    },
+    getAsyncFilmsHandler: (count) => {
+      dispatch(getAsyncFilms(count));
+    },
+    setAsyncFilterFilmsFromGenres: (item) => {
+      dispatch(getAsyncFilterFilmsFromGenres(item));
     }
   };
 };

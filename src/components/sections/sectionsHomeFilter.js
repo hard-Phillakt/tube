@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import "./_sections.scss";
 
-class SectionsHome extends React.Component {
+class SectionsHomeFilter extends React.Component {
 
 
     getTitle() {
@@ -46,13 +46,13 @@ class SectionsHome extends React.Component {
         return (
 
             <Link
-                to={`vf/${this.props.filmsAllItems.films_to_genres[0].id}/${this.props.filmsAllItems.films_to_genres[0].slug}/${this.props.filmsAllItems.id}/${this.props.filmsAllItems.slug}`}
+                to={`vf/`}
             >
-                <div uk-tooltip={'title: ' + this.props.filmsAllItems.description + '; pos: right-top; delay: 500;'} >
+                <div uk-tooltip={'title: ' +  + '; pos: right-top; delay: 500;'} >
                     <div className="uk-card-media-top">
-                        <img src={"http://tube-serv" + this.props.filmsAllItems.poster_img} alt={this.props.filmsAllItems.slug} />
+                        <img src={"http://tube-serv" } alt={"123"} />
                     </div>
-                    <h5>{this.props.filmsAllItems.title}</h5>
+                    <h5>{}</h5>
                 </div>
             </Link>
         )
@@ -72,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SectionsHome);
+export default connect(mapStateToProps, mapDispatchToProps)(SectionsHomeFilter);

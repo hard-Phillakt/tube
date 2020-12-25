@@ -4,6 +4,7 @@ const stateInit = {
     filmsAllFromAllGenres: [],
     filmsCurrent: {},
     filmsFromIdGenre: [],
+    filterFilmsFromGenresHome: [],
     btnViewPlay: true
 }
 
@@ -59,6 +60,27 @@ const films = (state = stateInit, action) => {
                 ...state,
                 btnViewPlay: action.stateBnt
             };
+
+
+
+        // Фильтр по жанрам на главной
+        case "GET_FILTE_FILMS_FROM_GENRES":
+
+            const filterFilmsFromGenresHome = action.filterFilmsFromGenresHome;
+
+            return {
+                ...state,
+                filterFilmsFromGenresHome
+            };
+
+
+
+
+
+
+
+
+            
 
         default:
 

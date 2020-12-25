@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 // import Preloader from '../preloader/preloader';
 import BtnDefault from '../../ui/buttons/btnDefault';
-import { getAsyncPosts } from '../../actions/actions';
+// import { getAsyncPosts } from '../../actions/actions';
 
 import "./_sections.scss";
 
@@ -126,9 +126,9 @@ const mapStateToProps = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAsyncPostsHandler: (slug, count) => {
-            dispatch(getAsyncPosts(slug, count));
-        }
+        // getAsyncPostsHandler: (slug, count) => {
+        //     dispatch(getAsyncPosts(slug, count));
+        // }
     };
 };
 
