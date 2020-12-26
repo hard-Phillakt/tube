@@ -35,14 +35,15 @@ class Navbar extends React.Component {
                                         <li className="link-home uk-active"
                                             onClick={() => {
                                                 this.props.setAsyncFilmsAllAction();
+                                                this.props.setStateBntPlay(true);
                                             }}
-                                        ><Link to="/">goivi</Link></li>
+                                        ><Link to="/">Kinnot</Link></li>
                                         <li
                                             onClick={() => {
                                                 this.props.setAsyncFilmsHandler();
                                                 this.props.setStateBntPlay(true);
                                             }}
-                                        ><Link to="/films">Фильмы по жанрам</Link></li>
+                                        ><Link to="/films">Фильмы</Link></li>
 
 
                                         {/* <li

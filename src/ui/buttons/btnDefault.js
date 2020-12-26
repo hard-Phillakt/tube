@@ -15,7 +15,9 @@ const btnDefault = (props) => {
             uk-padding-remove-top
             uk-padding-remove-bottom
             uk-padding-remove-left
-            ">{props.name}</span> <span className="material-icons">loop</span>
+            uk-padding-remove-left
+            uk-padding-remove-right
+            ">{props.name}</span>
         </button>
     )
 }

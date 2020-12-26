@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { getAsyncPosts } from '../actions/actions';
 import { Link } from "react-router-dom";
-// import { getAsyncPostbyIdAction } from '../actions/actions';
 import { getAsyncFilmbyIdAction, getStateBntPlay } from '../actions/actionsFilms';
 import Hls from '../../node_modules/hls.js';
 
@@ -10,9 +8,6 @@ import './view.scss';
 
 //  Slider
 import SliderDefault from '../components/sliders/sliderFilms';
-
-// Section
-// import Section from '../components/sections/sections';
 
 class View extends React.Component {
 
@@ -85,7 +80,11 @@ class View extends React.Component {
                             </div>
                         </div>
 
-                        <div className="uk-padding-small uk-padding-remove-left uk-padding-remove-right uk-article-meta" dangerouslySetInnerHTML={this.createMarkup(this.props.films.filmsCurrent.content)}></div>
+                        <div className="
+                        uk-padding-small 
+                        uk-padding-remove-left 
+                        uk-padding-remove-right 
+                        uk-article-meta" dangerouslySetInnerHTML={this.createMarkup(this.props.films.filmsCurrent.content)}></div>
 
                     </div>
 

@@ -68,7 +68,7 @@ export const getAsyncFilms = (param, count) => {
 //  Получить категории с фильмами по фильтру 
 const getFilterFilmsFromGenresAction = (filterFilmsFromGenresHome) => {
     return {
-        type: 'GET_FILTE_FILMS_FROM_GENRES',
+        type: 'GET_FILTER_FILMS_FROM_GENRES',
         filterFilmsFromGenresHome
     }
 }
@@ -76,11 +76,11 @@ const getFilterFilmsFromGenresAction = (filterFilmsFromGenresHome) => {
 export const getAsyncFilterFilmsFromGenres = (item) => {
 
 
-    console.log('filterFilmsFromGenresHome', item.films_to_genres);
+    console.log('filterFilmsFromGenresHome', item);
 
 
     return (dispatch) => {
-        dispatch(getFilterFilmsFromGenresAction(item.films_to_genres));
+        dispatch(getFilterFilmsFromGenresAction(item));
     };
 
         // fetch('http://tube-serv/api/v1/films-genres?expand=films_to_genres')

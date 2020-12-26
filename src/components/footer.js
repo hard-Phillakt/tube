@@ -6,16 +6,38 @@ const footer = () => {
         <footer>
             <div className="uk-section uk-section-secondary uk-light">
                 <div className="uk-container">
-                    <h3>Section Secondary</h3>
-                    <div className="uk-grid-match uk-child-width-1-3@m" uk-grid="true">
+                    <h3 className="tb-title__h1">KINNOT.net</h3>
+
+                    <div className="uk-child-width-1-2@m" uk-grid="true">
                         <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                            <p className="uk-flex">Онлайн кинотеатр<span className="material-icons uk-margin-small-left">movie</span></p>
+                            <p>Техническая поддержка: </p>
+                            <p><a href="mailto:support-kinnot@gmail.com">support-kinnot@gmail.com</a></p>
+                            <p>Социальные сети: </p>
+                            <div className="uk-flex uk-flex-inline">
+                                <div><a href="#!" className="uk-margin-right">vk</a></div>
+                                <div><a href="#!">facebook</a></div>
+                            </div>
+                            <p>Все видео на сайте предоставлены для ознакомления <br/> и не предполагают скачивание.</p>
                         </div>
                         <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-                        </div>
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                            <p>Для правообладателей: </p>
+                            <p>
+                                Если вы обнаружили материал, представленный на нашем сайте,
+                                который нарушает ваши авторские права, или же дискредитирует
+                                Вашу компанию, предоставляя неверную или искаженную информацию,
+                                пожалуйста свяжитесь с нами для решения этого вопроса.
+                            </p>
+                            <p>
+                                Для этого необходимо отправить e-mail с вашего корпоративного почтового ящика содержащий:
+                            </p>
+                            <p>
+                                контактные данные, реквизиты вашей компании;
+                                прямую ссылку(ссылки) на материал, который вы считаете спорным;
+                                заверенные сканированные копии документов, подтверждающих ваше эксклюзивное право на материал;
+                                в случае, если вы представляете интересы другой компании – копии документов на посреднические услуги;
+                            </p>
+                            <p>На адрес <a href="mailto:abuse-kinnot@gmail.com">abuse-kinnot@gmail.com</a></p>
                         </div>
                     </div>
                 </div>

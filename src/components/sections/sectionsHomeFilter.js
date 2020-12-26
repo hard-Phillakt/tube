@@ -12,7 +12,7 @@ class SectionsHomeFilter extends React.Component {
 
     getTitle() {
         return (
-            <h1 className="
+            <h3 className="
             uk-heading-line 
             uk-heading-medium 
             uk-padding 
@@ -21,7 +21,7 @@ class SectionsHomeFilter extends React.Component {
             tb-title__h1
             ">
                 <span>{this.props.title}</span>
-            </h1>
+            </h3>
         )
     }
 
@@ -36,6 +36,8 @@ class SectionsHomeFilter extends React.Component {
 
     componentDidMount() {
 
+        console.log(this.props.filterFilmFromGenres);
+
     }
 
     createMarkup(arg) {
@@ -44,15 +46,14 @@ class SectionsHomeFilter extends React.Component {
 
     render() {
         return (
-
             <Link
-                to={`vf/`}
+                to={`vf/${this.props.genre.id}/${this.props.genre.slug}/${this.props.filterFilmFromGenres.id}/${this.props.filterFilmFromGenres.slug}`}
             >
-                <div uk-tooltip={'title: ' +  + '; pos: right-top; delay: 500;'} >
+                <div uk-tooltip={'title: ' + this.props.filterFilmFromGenres.description + '; pos: right-top; delay: 500;'} >
                     <div className="uk-card-media-top">
-                        <img src={"http://tube-serv" } alt={"123"} />
+                        <img src={"http://tube-serv" + this.props.filterFilmFromGenres.poster_img } alt={this.props.filterFilmFromGenres.slug} />
                     </div>
-                    <h5>{}</h5>
+                    <h5>{this.props.filterFilmFromGenres.title}</h5>
                 </div>
             </Link>
         )
@@ -60,6 +61,8 @@ class SectionsHomeFilter extends React.Component {
 }
 
 const mapStateToProps = props => {
+
+    // console.log('SectionsHomeFilter', props);
     
     return props;
 };

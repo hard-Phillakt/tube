@@ -66,11 +66,9 @@ class SectionsFilms extends React.Component {
                                                     style={{
                                                         backgroundImage: `url(http://tube-serv${item.poster_img})`,
                                                         backgroundSize: 'cover'
-                                                        }}
-                                                    >
-
+                                                    }}
+                                                >
                                                     {/* <img src={"http://tube-serv" + item.poster_img} uk-img/> */}
-                                                    
                                                 </Link>
 
                                                 <div className="uk-margin-small-top">
@@ -85,13 +83,11 @@ class SectionsFilms extends React.Component {
                                                     >
                                                     </span>
                                                 </div> */}
-                                                
+
                                             </div>
                                         )
                                     })
-
                                     :
-
                                     <div className="uk-text-secondary">
                                         <p>На стадии заполнения...</p>
                                     </div>
@@ -104,8 +100,8 @@ class SectionsFilms extends React.Component {
                             {
                                 this.props.viewBtnLoader ?
                                     <BtnDefault name="Показать все"
-                                        // genres={this.props}
-                                        // getAll={this.props.getAsyncPostsHandler}
+                                    // genres={this.props}
+                                    // getAll={this.props.getAsyncPostsHandler}
                                     />
                                     :
                                     null

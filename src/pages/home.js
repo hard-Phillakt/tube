@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SectionsHome from '../components/sections/sectionsHome';
 import SectionsHomeFilter from '../components/sections/sectionsHomeFilter';
-import { 
-  getAsyncFilmsAllAction, 
-  getAsyncFilms, 
+import {
+  getAsyncFilmsAllAction,
+  getAsyncFilms,
   getAsyncFilterFilmsFromGenres
- } from '../actions/actionsHomes';
+} from '../actions/actionsHomes';
 
 import Preloader from '../components/preloader/preloader';
 
@@ -21,6 +21,8 @@ class Home extends React.Component {
     this.props.setAsyncFilmsAllAction();
 
     this.props.getAsyncFilmsHandler();
+
+    console.log(this.props.films.filterFilmsFromGenresHome);
   }
 
   render() {
@@ -81,33 +83,22 @@ class Home extends React.Component {
             <div className="uk-card uk-card-secondary uk-card-body uk-margin-medium-bottom">
 
               <div className="uk-column-1-2@s uk-column-1-3@m uk-column-1-4@l">
-
                 {
-
                   this.props.films.filmsAllFromAllGenres ?
-
                     this.props.films.filmsAllFromAllGenres.map((item, i) => {
-
                       return (
-
                         <div className="uk-flex"
                           key={item.slug}
                         >
                           <label>
                             <input className="uk-radio uk-margin-small-right" type="radio" name="failter-films-for-genres"
                               onChange={() => {
-
-                                // console.log(item);
-
                                 this.props.setAsyncFilterFilmsFromGenres(item);
-
                               }}
                             /> {item.title}
                           </label>
                         </div>
-
                       )
-
                     })
                     :
                     null
@@ -124,25 +115,28 @@ class Home extends React.Component {
               <div className="uk-child-width-1-5@m uk-grid-match" uk-grid="true">
                 {
 
-                  this.props.films.filterFilmsFromGenresHome ?
+                  this.props.films.filterFilmsFromGenresHome.films_to_genres ?
 
-                    this.props.films.filterFilmsFromGenresHome.map((item, i) => {
+                    this.props.films.filterFilmsFromGenresHome.films_to_genres.map((item, i) => {
+
+                      const genre = {
+                        id: this.props.films.filterFilmsFromGenresHome.id,
+                        slug: this.props.films.filterFilmsFromGenresHome.slug
+                      };
 
                       return (
 
-                        <div
+                        <SectionsHomeFilter
                           key={item.slug}
-                        >
-
-                        <SectionsHomeFilter />
-
-                        </div>
+                          filterFilmFromGenres={item}
+                          genre={genre}
+                        />
 
                       )
 
                     })
                     :
-                    <Preloader />
+                    null
                 }
               </div>
 
@@ -150,7 +144,7 @@ class Home extends React.Component {
 
           </div>
 
-          <div className="uk-section">
+          {/* <div className="uk-section">
             <div className="uk-container">
 
               <h2 className="
@@ -210,7 +204,7 @@ class Home extends React.Component {
               </div>
 
             </div>
-          </div>
+          </div> */}
 
           {/* <div className="uk-section">
             <div className="uk-container">

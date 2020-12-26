@@ -64,7 +64,7 @@ const films = (state = stateInit, action) => {
 
 
         // Фильтр по жанрам на главной
-        case "GET_FILTE_FILMS_FROM_GENRES":
+        case "GET_FILTER_FILMS_FROM_GENRES":
 
             const filterFilmsFromGenresHome = action.filterFilmsFromGenresHome;
 
