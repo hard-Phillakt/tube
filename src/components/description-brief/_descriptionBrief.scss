@@ -1,0 +1,328 @@
+
+.popover-body {
+    margin: -1px
+}
+
+.popover-body .video-popover {
+    padding: 10px 20px
+}
+
+.popover-body .video-popover .video-description {
+    margin: 5px 0
+}
+
+.popover-body .video-popover .video-extra {
+    margin: 13px 0 5px
+}
+
+.popover-body .video-popover .video-extra:after {
+    content: "";
+    clear: both;
+    display: table
+}
+
+.popover-body .video-popover .video-extra .foreign-ratings {
+    float: left;
+    margin: -2px 0 0 18px
+}
+
+.popover-body .video-popover .video-extra .foreign-ratings .foreign-rating .value+.key {
+    margin-left: 3px
+}
+
+.popover-body .video-popover .video-extra .foreign-ratings .foreign-rating+.foreign-rating {
+    margin-left: 12px
+}
+
+.popover-body .video-popover .video-extra .video-duration {
+    padding-top: 2px;
+    margin-left: 18px
+}
+
+.popover-body .video-popover .video-extra .video-duration .svgicon {
+    fill: #a6a6a6;
+    font-size: 12px
+}
+
+.popover-body .video-popover .voteButtons_v1 {
+    margin: 17px 0 9px
+}
+
+.popover-body .video-popover.type-tv {
+    padding: 0
+}
+
+.popover-body .video-popover.type-tv .wrap {
+    position: relative;
+    padding: 18px 20px
+}
+
+.popover-body .video-popover.type-tv .wrap:first-child {
+    padding-bottom: 0
+}
+
+.popover-body .video-popover.type-tv .wrap:last-child {
+    border-top: 1px solid #dedede
+}
+
+.popover-body .video-popover.type-tv .video-description {
+    margin: 5px 20px 15px
+}
+
+.popover-body .video-popover.type-tv .tv-channel {
+    font-size: 20px
+}
+
+.popover-body .video-popover.type-tv .tv-subject {
+    margin-bottom: 3px
+}
+
+.popover-body .video-popover.type-tv .tv-online {
+    margin-bottom: 11px
+}
+
+.popover-body .video-popover.type-tv .tv-online,.popover-body .video-popover.type-tv .tv-subject {
+    color: #a6a6a6;
+    font-size: 14px
+}
+
+.popover-body .video-popover.type-tv .tv-available {
+    color: #2b5;
+    font-size: 14px;
+    margin-bottom: 10px
+}
+
+.popover {
+    top: 0;
+    left: 100%;
+    z-index: 1075;
+    width: 400px !important;
+    padding: 1px;
+    background-clip: padding-box
+}
+
+.popover,.popover:before {
+    position: absolute;
+    display: block;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,.2)
+}
+
+.popover:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg)
+}
+
+.popover.bs-popover-top {
+    margin-top: -10px
+}
+
+.popover.bs-popover-top:before {
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px
+}
+
+.popover.bs-popover-right {
+    margin-left: 10px
+}
+
+.popover.bs-popover-right:before {
+    top: 50%;
+    left: -5px;
+    margin-top: -5px
+}
+
+.popover.bs-popover-bottom {
+    margin-top: 10px
+}
+
+.popover.bs-popover-bottom:before {
+    top: -5px;
+    left: 50%;
+    margin-left: -5px
+}
+
+.popover.bs-popover-left {
+    margin-left: -10px
+}
+
+.popover.bs-popover-left:before {
+    top: 50%;
+    right: -5px;
+    margin-top: -5px
+}
+
+.modal-open .popover {
+    z-index: 1110
+}
+
+.popover-body {
+    position: relative;
+    background-color: #fff
+}
+
+.voteButtons_v1 .vote-buttons {
+    font-size: 0
+}
+
+.voteButtons_v1 .vote-button {
+    text-align: center;
+    font-size: 16px;
+    text-decoration: none
+}
+
+.voteButtons_v1 .vote-button .svgicon {
+    -webkit-transition: fill .2s;
+    -moz-transition: fill .2s;
+    -ms-transition: fill .2s;
+    transition: fill .2s
+}
+
+.voteButtons_v1 .vote-button .value {
+    -webkit-transition: color .2s;
+    -moz-transition: color .2s;
+    -ms-transition: color .2s;
+    transition: color .2s
+}
+
+.voteButtons_v1.orientation-horizontal .vote-button {
+    user-select: none;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    height: 30px;
+    width: 100px;
+    background: #e6e6e6;
+    -webkit-transition: background-color .2s;
+    -moz-transition: background-color .2s;
+    -ms-transition: background-color .2s;
+    transition: background-color .2s
+}
+
+.voteButtons_v1.orientation-horizontal .vote-button .svgicon {
+    fill: #777
+}
+
+.voteButtons_v1.orientation-horizontal .vote-button+.vote-button {
+    margin-left: 10px
+}
+
+.voteButtons_v1.orientation-horizontal .vote-button.active {
+    color: #fff
+}
+
+.voteButtons_v1.orientation-horizontal .vote-button.active .svgicon {
+    fill: currentColor
+}
+
+.voteButtons_v1.orientation-horizontal .vote-button.is-dislike .svgicon {
+    position: relative;
+    top: 2px
+}
+
+.voteButtons_v1.orientation-horizontal .vote-button.is-dislike.active {
+    background-color: #f11
+}
+
+.voteButtons_v1.orientation-horizontal .vote-button.is-like.active {
+    background-color: #00a132
+}
+
+.voteButtons_v1.orientation-vertical.fill-dark .vote-button .svgicon {
+    fill: #a6a6a6
+}
+
+.voteButtons_v1.orientation-vertical.fill-dark .vote-button .value {
+    color: #a6a6a6
+}
+
+.voteButtons_v1.orientation-vertical.fill-transparent .vote-button .svgicon {
+    fill: hsla(0,0%,100%,.35)
+}
+
+.voteButtons_v1.orientation-vertical.fill-transparent .vote-button .value {
+    color: hsla(0,0%,100%,.5)
+}
+
+.voteButtons_v1.orientation-vertical .vote-button {
+    padding: 0;
+    border: 0;
+    background: none transparent
+}
+
+.voteButtons_v1.orientation-vertical .vote-button .value {
+    display: block;
+    margin-top: 7px;
+    font-size: 12px;
+    font-weight: 600
+}
+
+.voteButtons_v1.orientation-vertical .vote-button+.vote-button {
+    margin-left: 30px
+}
+
+.voteButtons_v1.orientation-vertical .vote-button.is-dislike.active .svgicon {
+    fill: #f11
+}
+
+.voteButtons_v1.orientation-vertical .vote-button.is-dislike.active .value {
+    color: #f11
+}
+
+.voteButtons_v1.orientation-vertical .vote-button.is-like .svgicon {
+    position: relative;
+    top: -3px
+}
+
+.voteButtons_v1.orientation-vertical .vote-button.is-like.active .svgicon {
+    fill: #00a132
+}
+
+.voteButtons_v1.orientation-vertical .vote-button.is-like.active .value {
+    color: #00a132
+}
+
+.voteButtons_v1.size-default .vote-button .svgicon {
+    display: block;
+    font-size: 26px;
+    margin: auto
+}
+
+.voteButtons_v1.size-small .vote-button .svgicon {
+    padding-right: 6px;
+    font-size: 12px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.popover div > span {
+    opacity: .9;
+}
+
+.popover-wrap {
+    position: relative;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import DescriptionBrief from '../description-brief/descriptionBrief';
 // import Preloader from '../preloader/preloader';
 // import BtnDefault from '../../ui/buttons/btnDefault';
 // import { getAsyncPosts } from '../../actions/actions';
@@ -44,23 +45,33 @@ class SectionsHome extends React.Component {
 
     render() {
         return (
+            <div className="popover-wrap">
+                <Link
+                    to={`vf/${this.props.filmsAllItems.films_to_genres[0].id}/${this.props.filmsAllItems.films_to_genres[0].slug}/${this.props.filmsAllItems.id}/${this.props.filmsAllItems.slug}`}
+                >
+                    {/* <div uk-tooltip={'title: ' + this.props.filmsAllItems.description + '; pos: right-top; delay: 500;'} > */}
+                    <div
+                        className=""
+                        onMouseOver={() => {
 
-            <Link
-                to={`vf/${this.props.filmsAllItems.films_to_genres[0].id}/${this.props.filmsAllItems.films_to_genres[0].slug}/${this.props.filmsAllItems.id}/${this.props.filmsAllItems.slug}`}
-            >
-                <div uk-tooltip={'title: ' + this.props.filmsAllItems.description + '; pos: right-top; delay: 500;'} >
-                    <div className="uk-card-media-top">
-                        <img src={"http://tube-serv" + this.props.filmsAllItems.poster_img} alt={this.props.filmsAllItems.slug} />
+                        }}
+                    >
+                        <div className="uk-card-media-top">
+                            <img src={"http://tube-serv" + this.props.filmsAllItems.poster_img} alt={this.props.filmsAllItems.slug} />
+                        </div>
+                        <h5>{this.props.filmsAllItems.title}</h5>
                     </div>
-                    <h5>{this.props.filmsAllItems.title}</h5>
-                </div>
-            </Link>
+                </Link>
+                
+                <DescriptionBrief />
+            </div>
+
         )
     }
 }
 
 const mapStateToProps = props => {
-    
+
     return props;
 };
 

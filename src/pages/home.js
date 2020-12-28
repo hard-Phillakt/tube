@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SectionsHome from '../components/sections/sectionsHome';
 import SectionsHomeFilter from '../components/sections/sectionsHomeFilter';
+import DescriptionBrief from '../components/description-brief/descriptionBrief';
 import {
   getAsyncFilmsAllAction,
   getAsyncFilms,
@@ -21,8 +22,6 @@ class Home extends React.Component {
     this.props.setAsyncFilmsAllAction();
 
     this.props.getAsyncFilmsHandler();
-
-    console.log(this.props.films.filterFilmsFromGenresHome);
   }
 
   render() {
@@ -30,6 +29,7 @@ class Home extends React.Component {
     return (
 
       <section className="home">
+      
         <div className="uk-section">
           <div className="uk-container">
 
