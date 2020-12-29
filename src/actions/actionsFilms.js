@@ -130,10 +130,29 @@ export const getAsyncFilmByIdFromSliderAction = (id) => {
 
 
 // 5.
-// Состояник кнопки Play при переключении фильмов
+// Состояние кнопки Play при переключении фильмов
 export const getStateBntPlay = (stateBnt) => {
     return {
         type: 'STATE_BTN_PLAY',
         stateBnt
+    }
+}
+
+
+// 6.
+// Передаем параметры для отображения Popover окна с краткими данными по фильму на главной по "Премьерам"
+export const getStatePopoverView = (popoverView) => {
+    return {
+        type: 'STATE_POPOVER_PREMIERE_VIEW',
+        popoverView
+    }
+}
+
+// 7.
+// Передаем параметры для отображения Popover окна с краткими данными по фильму на главной по "Фильтрам"
+export const getStatePopoverFilterView = (popoverView) => {
+    return {
+        type: 'STATE_POPOVER_FILTER_VIEW',
+        popoverView
     }
 }

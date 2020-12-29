@@ -5,7 +5,9 @@ const stateInit = {
     filmsCurrent: {},
     filmsFromIdGenre: [],
     filterFilmsFromGenresHome: [],
-    btnViewPlay: true
+    btnViewPlay: true,
+    popoverViewPremiere: {},
+    popoverViewFilter: {},
 }
 
 const films = (state = stateInit, action) => {
@@ -75,12 +77,28 @@ const films = (state = stateInit, action) => {
 
 
 
+        case "STATE_POPOVER_PREMIERE_VIEW":
+
+            const popoverViewPremiere = action.popoverViewPremiere;
+
+            return {
+                ...state,
+                popoverViewPremiere
+            };
 
 
 
+        case "STATE_POPOVER_FILTER_VIEW":
+
+            const popoverViewFilter = action.popoverViewFilter;
+
+            return {
+                ...state,
+                popoverViewFilter
+            };
 
 
-            
+
 
         default:
 

@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import DescriptionBrief from '../description-brief/descriptionBrief';
+
 // import Preloader from '../preloader/preloader';
 // import BtnDefault from '../../ui/buttons/btnDefault';
-// import { getAsyncPosts } from '../../actions/actions';
+import { getStatePopoverView } from '../../actions/actionsFilms';
 
 import "./_sections.scss";
 
@@ -39,31 +40,58 @@ class SectionsHome extends React.Component {
 
     }
 
+    viewPopoverHandler(stateViewPopover) {
+        this.props.films.popoverView = stateViewPopover;
+        this.props.setStatePopoverView(this.props.films.popoverView);
+    }
+
     createMarkup(arg) {
         return { __html: arg };
     }
 
     render() {
         return (
-            <div className="popover-wrap">
+            <div className="popover-wrap"
+                onMouseEnter={() => {
+
+                    // Передаем параметры для отображения Popover окна с краткими данными по фильму
+                    const stateViewPopover = {
+                        'id': this.props.filmsAllItems.id,
+                        'view': true
+                    };
+
+                    this.viewPopoverHandler(stateViewPopover);
+                }}
+                onMouseLeave={() => {
+
+                    // Передаем параметры для скрытия Popover окна с краткими данными по фильму
+                    const stateViewPopover = {
+                        'id': this.props.filmsAllItems.id,
+                        'view': false
+                    };
+
+                    this.viewPopoverHandler(stateViewPopover);
+                }}
+            >
                 <Link
                     to={`vf/${this.props.filmsAllItems.films_to_genres[0].id}/${this.props.filmsAllItems.films_to_genres[0].slug}/${this.props.filmsAllItems.id}/${this.props.filmsAllItems.slug}`}
                 >
                     {/* <div uk-tooltip={'title: ' + this.props.filmsAllItems.description + '; pos: right-top; delay: 500;'} > */}
-                    <div
-                        className=""
-                        onMouseOver={() => {
-
-                        }}
-                    >
+                    <div>
                         <div className="uk-card-media-top">
                             <img src={"http://tube-serv" + this.props.filmsAllItems.poster_img} alt={this.props.filmsAllItems.slug} />
                         </div>
                         <h5>{this.props.filmsAllItems.title}</h5>
                     </div>
                 </Link>
-                
-                <DescriptionBrief />
+
+                {
+                    this.props.films.popoverView.id == this.props.filmsAllItems.id && this.props.films.popoverView.view ?
+                        <DescriptionBrief />
+                        :
+                        null
+                }
+
             </div>
 
         )
@@ -77,9 +105,9 @@ const mapStateToProps = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getAsyncPostsHandler: (slug, count) => {
-        //     dispatch(getAsyncPosts(slug, count));
-        // }
+        setStatePopoverView: (popoverView) => {
+            dispatch(getStatePopoverView(popoverView));
+        }
     };
 };
 

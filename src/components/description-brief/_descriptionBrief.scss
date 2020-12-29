@@ -326,3 +326,14 @@
 .popover-wrap {
     position: relative;
 }
+
+.popover::after {
+    content: '';
+    width: 10px;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: -10px;
+    z-index: 0;
+}
