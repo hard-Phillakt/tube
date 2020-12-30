@@ -342,10 +342,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    height: 30px;
+    border-bottom: 1px dotted #444;
+    transition: all .3s;
 }
 
 .popover-body .video-popover .video-description:hover {
     white-space: inherit;
+    border-bottom: 1px dotted #999;
+    height: 130px;
 }
 
 

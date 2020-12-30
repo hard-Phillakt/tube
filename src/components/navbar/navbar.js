@@ -61,10 +61,10 @@ class Navbar extends React.Component {
                                 </div>
 
                                 <div className="uk-navbar-item uk-navbar-right">
-                                    <form action="javascript:void(0)">
+                                    <div>
                                         <input className="uk-input uk-form-width-medium uk-margin-small-right" type="text" placeholder="Поиск по фильмам" />
                                         <button className="uk-button uk-button-default">Найти</button>
-                                    </form>
+                                    </div>
                                 </div>
                             </nav>
                         </div>
