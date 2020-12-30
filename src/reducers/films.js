@@ -8,6 +8,7 @@ const stateInit = {
     btnViewPlay: true,
     popoverViewPremiere: {},
     popoverViewFilter: {},
+    popoverViewFilmGenre: {},
 }
 
 const films = (state = stateInit, action) => {
@@ -95,6 +96,16 @@ const films = (state = stateInit, action) => {
             return {
                 ...state,
                 popoverViewFilter
+            };
+
+
+        case "STATE_POPOVER_FILM_GENRE_VIEW":
+
+            const popoverViewFilmGenre = action.popoverViewFilmGenre;
+
+            return {
+                ...state,
+                popoverViewFilmGenre
             };
 
 

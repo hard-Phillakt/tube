@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import DescriptionBrief from '../description-brief/descriptionBrief';
-import { getStatePopoverFilterView } from '../../actions/actionsFilms';
+import { getStatePopoverViewFilter } from '../../actions/actionsFilms';
 
 // import Preloader from '../preloader/preloader';
 // import BtnDefault from '../../ui/buttons/btnDefault';
@@ -29,7 +29,6 @@ class SectionsHomeFilter extends React.Component {
     }
 
     toUpWindow() {
-        // setTimeout(() => (window.scroll({ top: 0, left: 0, behavior: 'smooth' })), 600)
         window.scroll({ top: 0, left: 0 });
     }
 
@@ -41,9 +40,9 @@ class SectionsHomeFilter extends React.Component {
         console.log(this.props.filterFilmFromGenres);
     }
 
-    viewPopoverHandler(stateViewPopover) {
-        this.props.films.popoverView = stateViewPopover;
-        this.props.setStatePopoverFilterView(this.props.films.popoverView);
+    viewPopoverHandlerFilter(popoverViewFilter) {
+        this.props.films.popoverView = popoverViewFilter;
+        this.props.setStatePopoverViewFilter(this.props.films.popoverView);
     }
 
     createMarkup(arg) {
@@ -56,22 +55,22 @@ class SectionsHomeFilter extends React.Component {
                 onMouseEnter={() => {
 
                     // Передаем параметры для отображения Popover окна с краткими данными по "Фильтрам"
-                    const stateViewPopover = {
+                    const popoverViewFilter = {
                         'id': this.props.filterFilmFromGenres.id,
                         'view': true
                     };
 
-                    this.viewPopoverHandler(stateViewPopover);
+                    this.viewPopoverHandlerFilter(popoverViewFilter);
                 }}
                 onMouseLeave={() => {
 
                     // Передаем параметры для скрытия Popover окна с краткими данными по "Фильтрам"
-                    const stateViewPopover = {
+                    const popoverViewFilter = {
                         'id': this.props.filterFilmFromGenres.id,
                         'view': false
                     };
 
-                    this.viewPopoverHandler(stateViewPopover);
+                    this.viewPopoverHandlerFilter(popoverViewFilter);
                 }}
             >
                 <Link
@@ -88,8 +87,8 @@ class SectionsHomeFilter extends React.Component {
                 </Link>
 
                 {
-                    this.props.films.popoverView.id == this.props.filterFilmFromGenres.id && this.props.films.popoverView.view ?
-                        <DescriptionBrief />
+                    this.props.films.popoverViewFilter.id == this.props.filterFilmFromGenres.id && this.props.films.popoverViewFilter.view ?
+                        <DescriptionBrief brief={this.props.filterFilmFromGenres} />
                         :
                         null
                 }
@@ -111,8 +110,8 @@ const mapDispatchToProps = (dispatch) => {
         // getAsyncPostsHandler: (slug, count) => {
         //     dispatch(getAsyncPosts(slug, count));
         // }
-        setStatePopoverFilterView: (popoverView) => {
-            dispatch(getStatePopoverFilterView(popoverView));
+        setStatePopoverViewFilter: (popoverViewFilter) => {
+            dispatch(getStatePopoverViewFilter(popoverViewFilter));
         }
     };
 };

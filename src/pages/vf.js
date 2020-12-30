@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { getAsyncFilmbyIdAction, getStateBntPlay } from '../actions/actionsFilms';
 import Hls from '../../node_modules/hls.js';
 
+import { Helmet } from "react-helmet";
+
 import './view.scss';
 
 //  Slider
@@ -23,11 +25,6 @@ class View extends React.Component {
     }
 
     filmPlay() {
-
-        console.log('film-play');
-
-        // Убираем кнопку с постером при включении плеера
-        // this.RefPlayerBtnPlay.current.remove();
 
         // Склеиваем ссылку для плеера
         const videoSrc = this.props.films.filmsCurrent.proxy_url_video + "/" + this.props.films.filmsCurrent.original_url_video;
@@ -56,6 +53,17 @@ class View extends React.Component {
             uk-padding-remove-left
             uk-padding-remove-right
             ">
+
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>{this.props.films.filmsCurrent.title}</title>
+                    <meta name="description" content={this.props.films.filmsCurrent.description} />
+                    <meta name="keywords" content={this.props.films.filmsCurrent.keywords} />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <meta name="theme-color" content="#000000" />
+                </Helmet>
+
+
                 <div className="uk-container uk-container-small">
                     <ul className="uk-breadcrumb">
                         <li><Link to="/">Главная</Link></li>
@@ -67,7 +75,10 @@ class View extends React.Component {
                     <div className="uk-container uk-container-small uk-margin-top">
 
                         <div className="uk-column-1-2@s uk-column-1-3@m uk-column-1-4@l">
-                            <img src={"http://tube-serv" + this.props.films.filmsCurrent.poster_img} alt={this.props.films.filmsCurrent.slug} />
+                            <img 
+                            src={"http://tube-serv" + this.props.films.filmsCurrent.poster_img} alt={this.props.films.filmsCurrent.slug} 
+                                className="uk-margin-small-bottom"
+                            />
                             <div className="uk-article-meta">
                                 <p>Оригинальное название: {this.props.films.filmsCurrent.original_title}</p>
                                 <p dangerouslySetInnerHTML={this.createMarkup("Слоган: " + this.props.films.filmsCurrent.tagline)}></p>
@@ -107,31 +118,31 @@ class View extends React.Component {
                                         >
                                         </video>
 
-                                        {  
+                                        {
                                             this.props.films.btnViewPlay ?
 
-                                            <div className="vf-btn-play"
-                                                ref={this.RefPlayerBtnPlay}
-                                                style={{
-                                                    // display: this.props.films.btnViewPlay ? 'flex' : 'none',
-                                                    background: "#444" 
-                                                }}
-                                                onClick={() => {
-                                                    this.filmPlay();
-                                                    this.props.setStateBntPlay(false);
-                                                }}>
+                                                <div className="vf-btn-play"
+                                                    ref={this.RefPlayerBtnPlay}
+                                                    style={{
+                                                        // display: this.props.films.btnViewPlay ? 'flex' : 'none',
+                                                        background: "#444"
+                                                    }}
+                                                    onClick={() => {
+                                                        this.filmPlay();
+                                                        this.props.setStateBntPlay(false);
+                                                    }}>
 
-                                                <span className="material-icons">
-                                                    play_arrow
+                                                    <span className="material-icons">
+                                                        play_arrow
                                                 </span>
-                                            </div>
-                                            : 
-                                            null
+                                                </div>
+                                                :
+                                                null
                                         }
 
                                     </div>
                                     :
-                                    
+
                                     null
                             }
 

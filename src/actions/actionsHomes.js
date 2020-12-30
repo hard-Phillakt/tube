@@ -76,7 +76,7 @@ const getFilterFilmsFromGenresAction = (filterFilmsFromGenresHome) => {
 export const getAsyncFilterFilmsFromGenres = (item) => {
 
 
-    console.log('filterFilmsFromGenresHome', item);
+    // console.log('filterFilmsFromGenresHome', item);
 
 
     return (dispatch) => {

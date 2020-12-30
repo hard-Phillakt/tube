@@ -5,7 +5,7 @@ import DescriptionBrief from '../description-brief/descriptionBrief';
 
 // import Preloader from '../preloader/preloader';
 // import BtnDefault from '../../ui/buttons/btnDefault';
-import { getStatePopoverView } from '../../actions/actionsFilms';
+import { getStatePopoverViewPremiere } from '../../actions/actionsFilms';
 
 import "./_sections.scss";
 
@@ -28,7 +28,6 @@ class SectionsHome extends React.Component {
     }
 
     toUpWindow() {
-        // setTimeout(() => (window.scroll({ top: 0, left: 0, behavior: 'smooth' })), 600)
         window.scroll({ top: 0, left: 0 });
     }
 
@@ -37,12 +36,11 @@ class SectionsHome extends React.Component {
     }
 
     componentDidMount() {
-
     }
 
-    viewPopoverHandler(stateViewPopover) {
-        this.props.films.popoverView = stateViewPopover;
-        this.props.setStatePopoverView(this.props.films.popoverView);
+    viewPopoverHandlerPremiere(popoverViewPremiere) {
+        this.props.films.popoverViewPremiere = popoverViewPremiere;
+        this.props.setStatePopoverViewPremiere(this.props.films.popoverViewPremiere);
     }
 
     createMarkup(arg) {
@@ -55,22 +53,22 @@ class SectionsHome extends React.Component {
                 onMouseEnter={() => {
 
                     // Передаем параметры для отображения Popover окна с краткими данными по фильму
-                    const stateViewPopover = {
+                    const popoverViewPremiere = {
                         'id': this.props.filmsAllItems.id,
                         'view': true
                     };
 
-                    this.viewPopoverHandler(stateViewPopover);
+                    this.viewPopoverHandlerPremiere(popoverViewPremiere);
                 }}
                 onMouseLeave={() => {
 
                     // Передаем параметры для скрытия Popover окна с краткими данными по фильму
-                    const stateViewPopover = {
+                    const popoverViewPremiere = {
                         'id': this.props.filmsAllItems.id,
                         'view': false
                     };
 
-                    this.viewPopoverHandler(stateViewPopover);
+                    this.viewPopoverHandlerPremiere(popoverViewPremiere);
                 }}
             >
                 <Link
@@ -86,8 +84,8 @@ class SectionsHome extends React.Component {
                 </Link>
 
                 {
-                    this.props.films.popoverView.id == this.props.filmsAllItems.id && this.props.films.popoverView.view ?
-                        <DescriptionBrief />
+                    this.props.films.popoverViewPremiere.id == this.props.filmsAllItems.id && this.props.films.popoverViewPremiere.view ?
+                        <DescriptionBrief brief={this.props.filmsAllItems} />
                         :
                         null
                 }
@@ -105,8 +103,8 @@ const mapStateToProps = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setStatePopoverView: (popoverView) => {
-            dispatch(getStatePopoverView(popoverView));
+        setStatePopoverViewPremiere: (popoverView) => {
+            dispatch(getStatePopoverViewPremiere(popoverView));
         }
     };
 };

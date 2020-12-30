@@ -141,18 +141,27 @@ export const getStateBntPlay = (stateBnt) => {
 
 // 6.
 // Передаем параметры для отображения Popover окна с краткими данными по фильму на главной по "Премьерам"
-export const getStatePopoverView = (popoverView) => {
+export const getStatePopoverViewPremiere = (popoverViewPremiere) => {
     return {
         type: 'STATE_POPOVER_PREMIERE_VIEW',
-        popoverView
+        popoverViewPremiere
     }
 }
 
 // 7.
 // Передаем параметры для отображения Popover окна с краткими данными по фильму на главной по "Фильтрам"
-export const getStatePopoverFilterView = (popoverView) => {
+export const getStatePopoverViewFilter = (popoverViewFilter) => {
     return {
         type: 'STATE_POPOVER_FILTER_VIEW',
-        popoverView
+        popoverViewFilter
+    }
+}
+
+// 8.
+// Передаем параметры для отображения Popover окна с краткими данными по фильму на главной по "Фильтрам"
+export const getStatePopoverViewFilmGenre = (popoverViewFilmGenre) => {
+    return {
+        type: 'STATE_POPOVER_FILM_GENRE_VIEW',
+        popoverViewFilmGenre
     }
 }

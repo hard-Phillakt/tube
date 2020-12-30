@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 // import Preloader from '../preloader/preloader';
 import BtnDefault from '../../ui/buttons/btnDefault';
 // import { getAsyncPosts } from '../../actions/actions';
+import { getStatePopoverViewFilmGenre } from '../../actions/actionsFilms';
+import DescriptionBrief from '../description-brief/descriptionBrief';
 
 import "./_sections.scss";
 
 class SectionsFilms extends React.Component {
-
 
     getTitle() {
         return (
@@ -26,12 +27,16 @@ class SectionsFilms extends React.Component {
     }
 
     toUpWindow() {
-        // setTimeout(() => (window.scroll({ top: 0, left: 0, behavior: 'smooth' })), 600)
         window.scroll({ top: 0, left: 0 });
     }
 
     createMarkup(arg) {
         return { __html: arg };
+    }
+
+    viewPopoverHandlerPremiere(popoverViewFilmGenre) {
+        this.props.films.popoverViewFilmGenre = popoverViewFilmGenre;
+        this.props.setStatePopoverViewFilmGenre(this.props.films.popoverViewFilmGenre);
     }
 
     componentDidMount() {
@@ -55,10 +60,34 @@ class SectionsFilms extends React.Component {
                                     this.props.filmsGenres.films_to_genres.map((item, i) => {
 
                                         return (
+
                                             <div
-                                                className="uk-width-1-6@m"
-                                                uk-tooltip={"title: " + item.description + "; pos: right-top; delay: 500"}
+                                                className="uk-width-1-6@m popover-wrap"
+                                                // uk-tooltip={"title: " + item.description + "; pos: right-top; delay: 500"}
                                                 key={item.id}
+                                                onMouseEnter={() => {
+
+                                                    // Передаем параметры для отображения Popover окна с краткими данными по "Фильтрам"
+                                                    const popoverViewFilmGenre = {
+                                                        'id': item.id,
+                                                        'genre_id': this.props.filmsGenres.id,
+                                                        'view': true
+                                                    };
+
+                                                    this.viewPopoverHandlerPremiere(popoverViewFilmGenre);
+
+                                                }}
+                                                onMouseLeave={() => {
+
+                                                    // Передаем параметры для скрытия Popover окна с краткими данными по "Фильтрам"
+                                                    const popoverViewFilmGenre = {
+                                                        'id': item.id,
+                                                        'genre_id': this.props.filmsGenres.id,
+                                                        'view': false
+                                                    };
+
+                                                    this.viewPopoverHandlerPremiere(popoverViewFilmGenre);
+                                                }}
                                             >
                                                 <Link onClick={() => (this.toUpWindow())}
                                                     to={`/vf/${this.props.filmsGenres.id}/${this.props.filmsGenres.slug}/${item.id}/${item.slug}`}
@@ -75,22 +104,26 @@ class SectionsFilms extends React.Component {
                                                     <Link onClick={() => (this.toUpWindow())} className="tb-link" to={`/vf/${this.props.filmsGenres.id}/${this.props.filmsGenres.slug}/${item.id}/${item.slug}`}>{item.title}</Link>
                                                 </div>
 
-                                                {/* <div>
-                                                    <span
-                                                        className="tb-tooltip-box"
-                                                        uk-tooltip={"title: " + item.description}
-                                                        dangerouslySetInnerHTML={this.createMarkup("<p>Описание</p>")}
-                                                    >
-                                                    </span>
-                                                </div> */}
+                                                {
+                                                    // Делаем проверку: 
+                                                    // если id фильма равен id попапа и id жанра фильма равен id жанру попапа и свойство view равно true 
+                                                    // то показываем попап с краткой информацией
+                                                    this.props.films.popoverViewFilmGenre.id == item.id && this.props.films.popoverViewFilmGenre.genre_id == this.props.filmsGenres.id && this.props.films.popoverViewFilmGenre.view ?
+                                                        <DescriptionBrief brief={item} />
+                                                        :
+                                                        null
+                                                }
 
                                             </div>
+
+
                                         )
                                     })
                                     :
                                     <div className="uk-text-secondary">
                                         <p>На стадии заполнения...</p>
                                     </div>
+
                             }
 
                         </div>
@@ -122,9 +155,9 @@ const mapStateToProps = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getAsyncPostsHandler: (slug, count) => {
-        //     dispatch(getAsyncPosts(slug, count));
-        // }
+        setStatePopoverViewFilmGenre: (popoverViewFilmGenre) => {
+            dispatch(getStatePopoverViewFilmGenre(popoverViewFilmGenre));
+        }
     };
 };
 

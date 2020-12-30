@@ -29,7 +29,7 @@ class Navbar extends React.Component {
                     {/* uk-sticky="sel-target: .uk-container; cls-active: uk-navbar-sticky" */}
                     <div className="uk-section-secondary uk-light" >
                         <div className="uk-container uk-container-xlarge">
-                            <nav className="uk-margin" uk-navbar="mode: hover">
+                            <nav className="uk-navbar-container uk-section-secondary uk-margin" uk-navbar="mode: hover">
                                 <div className="uk-navbar-left">
                                     <ul className="uk-navbar-nav">
                                         <li className="link-home uk-active"
@@ -56,8 +56,15 @@ class Navbar extends React.Component {
                                                 this.props.getAsyncPostsHandler('anime');
                                             }}
                                         ><Link to="/anime">Аниме</Link></li> */}
-                                        
+
                                     </ul>
+                                </div>
+
+                                <div className="uk-navbar-item uk-navbar-right">
+                                    <form action="javascript:void(0)">
+                                        <input className="uk-input uk-form-width-medium uk-margin-small-right" type="text" placeholder="Поиск по фильмам" />
+                                        <button className="uk-button uk-button-default">Найти</button>
+                                    </form>
                                 </div>
                             </nav>
                         </div>

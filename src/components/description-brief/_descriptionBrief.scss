@@ -337,3 +337,69 @@
     left: -10px;
     z-index: 0;
 }
+
+.popover-body .video-popover .video-description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.popover-body .video-popover .video-description:hover {
+    white-space: inherit;
+}
+
+
+// Colors 
+
+// #63cdda like light
+// #3dc1d3 like strong
+
+.popover-body .like {
+
+    &-light {
+        background: #63cdda;
+        transition: 'background' .3s ease-in-out;
+
+        &:hover {
+            background: #3dc1d3;
+        }
+    }
+
+    &-strong {
+        background: #3dc1d3;
+    }
+
+    &-c {
+        
+        &-white {
+            color: #fff;
+        }
+    }
+}
+
+
+// #cf6a87 dislike light
+// #c44569 dislike strong
+.popover-body .dislike {
+
+    &-light {
+        background: #cf6a87;
+        transition: 'background' .3s ease-in-out;
+
+        &:hover {
+            background: #c44569;
+        }
+    }
+
+    &-strong {
+        background: #c44569;
+    }
+
+    &-c {
+        
+        &-white {
+            color: #fff;
+        }
+    }
+}
+
