@@ -2,10 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
-import { 
-    getAsyncAllFilmsFromGenreAction, 
-    getAsyncFilmByIdFromSliderAction, 
-    getStateBntPlay } from '../../actions/actionsFilms';
+import {
+    getAsyncAllFilmsFromGenreAction,
+    getAsyncFilmByIdFromSliderAction,
+    getStateBntPlay,
+    getStatePopoverViewFilmGenreSlider
+} from '../../actions/actionsFilms';
+
+import DescriptionBrief from '../description-brief/descriptionBrief';
 
 import './_sliderDefault.scss';
 
@@ -20,6 +24,11 @@ class sliderFilms extends React.Component {
 
         // Выводим остальные фильмы из категории в слайдер
         this.props.setAsyncAllFilmsFromGenreAction(this.props.matchparam);
+    }
+
+    viewPopoverHandlerFilmGenreSlider(popoverViewFilmGenreSlider) {
+        this.props.films.popoverViewFilmGenreSlider = popoverViewFilmGenreSlider;
+        this.props.setStatePopoverViewFilmGenreSlider(this.props.films.popoverViewFilmGenreSlider);
     }
 
     createMarkup(arg) {
@@ -44,47 +53,75 @@ class sliderFilms extends React.Component {
                                 return (
                                     <li key={item.slug}>
 
-                                        <div
-                                            className="tb-slider-item"
-                                            style={{ height: 'auto', width: '70%' }}>
+                                        <div className="popover-wrap"
 
-                                            <Link onClick={() => {
+                                            onMouseEnter={() => {
 
-                                                // Загружаем фильм из слайдера 
-                                                this.props.setAsyncFilmByIdFromSliderAction(item.id);
-
-                                                // Обновляем список фильмов в слайдере под фильмом
-                                                let param = {
-                                                    id_genre: this.props.matchparam.id_genre,
-                                                    genre: this.props.matchparam.slug,
-                                                    id_films: item.id,
-                                                    slug: item.slug
+                                                // Передаем параметры для отображения Popover окна с краткими данными по фильму
+                                                const popoverViewFilmGenreSlider = {
+                                                    'id': item.id,
+                                                    'view': true
                                                 };
 
-                                                this.props.setAsyncAllFilmsFromGenreAction(param);
-
-                                                this.props.setStateBntPlay(true);
-
-                                                this.props.RefPlayer.pause();
-
+                                                this.viewPopoverHandlerFilmGenreSlider(popoverViewFilmGenreSlider);
                                             }}
-                                                to={`/vf/${this.props.matchparam.id_genre}/${this.props.matchparam.genre}/${item.id}/${item.slug}`}
 
-                                                className="uk-card uk-card-default  tb-card-body"
+                                            onMouseLeave={() => {
 
-                                            // style={{
-                                            //     backgroundImage: `url(http://tube-serv${item.poster_img})`,
-                                            //     backgroundSize: 'cover'
-                                            // }}
+                                                // Передаем параметры для скрытия Popover окна с краткими данными по фильму
+                                                const popoverViewFilmGenreSlider = {
+                                                    'id': item.id,
+                                                    'view': false
+                                                };
 
-                                            >
-                                                <img src={"http://tube-serv" + item.poster_img} alt={item.slug} />
-                                            </Link>
+                                                this.viewPopoverHandlerFilmGenreSlider(popoverViewFilmGenreSlider);
+                                            }}
 
-                                            <div className="uk-margin-small-top">
-                                                <Link onClick={() => (this.toUpWindow())} className="tb-link" to={`/vf/${this.props.matchparam.id_genre}/${this.props.matchparam.genre}/${item.id}/${item.slug}`}>{item.title}</Link>
+                                        >
+
+                                            <div
+                                                className="tb-slider-item">
+
+                                                <Link onClick={() => {
+
+                                                    // Загружаем фильм из слайдера 
+                                                    this.props.setAsyncFilmByIdFromSliderAction(item.id);
+
+                                                    // Обновляем список фильмов в слайдере под фильмом
+                                                    let param = {
+                                                        id_genre: this.props.matchparam.id_genre,
+                                                        genre: this.props.matchparam.slug,
+                                                        id_films: item.id,
+                                                        slug: item.slug
+                                                    };
+
+                                                    this.props.setAsyncAllFilmsFromGenreAction(param);
+
+                                                    this.props.setStateBntPlay(true);
+
+                                                    this.props.RefPlayer.pause();
+
+                                                }}
+                                                    to={`/vf/${this.props.matchparam.id_genre}/${this.props.matchparam.genre}/${item.id}/${item.slug}`}
+
+                                                    className="uk-card uk-card-default  tb-card-body"
+                                                >
+                                                    <img src={"http://tube-serv" + item.poster_img} alt={item.slug} />
+                                                </Link>
+
+                                                <div className="uk-margin-small-top">
+                                                    <Link onClick={() => (this.toUpWindow())} className="tb-link" to={`/vf/${this.props.matchparam.id_genre}/${this.props.matchparam.genre}/${item.id}/${item.slug}`}>{item.title}</Link>
+                                                </div>
+
+
                                             </div>
 
+                                            {
+                                                this.props.films.popoverViewFilmGenreSlider.id == item.id && this.props.films.popoverViewFilmGenreSlider.view ?
+                                                    <DescriptionBrief brief={item} />
+                                                    :
+                                                    null
+                                            }
 
                                         </div>
 
@@ -117,6 +154,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setStateBntPlay: (param) => {
             dispatch(getStateBntPlay(param))
+        },
+        setStatePopoverViewFilmGenreSlider: (param) => {
+            dispatch(getStatePopoverViewFilmGenreSlider(param))
         }
     };
 };

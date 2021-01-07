@@ -37,7 +37,7 @@ class SectionsHomeFilter extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.filterFilmFromGenres);
+
     }
 
     viewPopoverHandlerFilter(popoverViewFilter) {
@@ -82,7 +82,9 @@ class SectionsHomeFilter extends React.Component {
                         <div className="uk-card-media-top">
                             <img src={"http://tube-serv" + this.props.filterFilmFromGenres.poster_img} alt={this.props.filterFilmFromGenres.slug} />
                         </div>
-                        <h5>{this.props.filterFilmFromGenres.title}</h5>
+                        <div className="uk-margin-small-top">
+                            <div className="tb-link">{this.props.filterFilmFromGenres.title}</div>
+                        </div>
                     </div>
                 </Link>
 

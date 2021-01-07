@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Home from '../../pages/home';
 import Films from '../../pages/films';
+import Search from '../../components/search/search';
 // import Serials from '../../pages/serials';
 // import Anime from '../../pages/anime';
 import View from '../../pages/vf';
@@ -61,10 +62,7 @@ class Navbar extends React.Component {
                                 </div>
 
                                 <div className="uk-navbar-item uk-navbar-right">
-                                    <div>
-                                        <input className="uk-input uk-form-width-medium uk-margin-small-right" type="text" placeholder="Поиск по фильмам" />
-                                        <button className="uk-button uk-button-default">Найти</button>
-                                    </div>
+                                    <Search />
                                 </div>
                             </nav>
                         </div>

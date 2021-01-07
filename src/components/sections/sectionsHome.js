@@ -79,7 +79,9 @@ class SectionsHome extends React.Component {
                         <div className="uk-card-media-top">
                             <img src={"http://tube-serv" + this.props.filmsAllItems.poster_img} alt={this.props.filmsAllItems.slug} />
                         </div>
-                        <h5>{this.props.filmsAllItems.title}</h5>
+                        <div className="uk-margin-small-top">
+                            <div className="tb-link">{this.props.filmsAllItems.title}</div>
+                        </div>
                     </div>
                 </Link>
 

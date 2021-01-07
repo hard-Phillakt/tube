@@ -6,19 +6,24 @@ const footer = () => {
         <footer>
             <div className="uk-section uk-section-secondary uk-light">
                 <div className="uk-container">
-                    <h3 className="tb-title__h1">KINNOT.net</h3>
+                    {/* <h3 className="tb-title__h1">KINNOT.net</h3> */}
 
-                    <div className="uk-child-width-1-2@m" uk-grid="true">
+                    <div className="uk-child-width-1-2@m uk-article-meta" uk-grid="true">
                         <div>
-                            <p className="uk-flex">Онлайн кинотеатр<span className="material-icons uk-margin-small-left">movie</span></p>
+                            <p className="uk-flex">
+                                <span className="material-icons uk-margin-small-right">theaters</span>
+                                Онлайн кинотеатр
+                            </p>
                             <p>Техническая поддержка: </p>
-                            <p><a href="mailto:support-kinnot@gmail.com">support-kinnot@gmail.com</a></p>
+                            <p className="uk-flex">
+                                <span className="material-icons uk-margin-small-right">email</span>
+                                <a href="mailto:support-kinnot@gmail.com">support-kinnot@gmail.com</a></p>
                             <p>Социальные сети: </p>
                             <div className="uk-flex uk-flex-inline">
                                 <div><a href="#!" className="uk-margin-right">vk</a></div>
                                 <div><a href="#!">facebook</a></div>
                             </div>
-                            <p>Все видео на сайте предоставлены для ознакомления <br/> и не предполагают скачивание.</p>
+                            <p>Все видео на сайте предоставлены для ознакомления <br /> и не предполагают скачивание.</p>
                         </div>
                         <div>
                             <p>Для правообладателей: </p>
@@ -31,12 +36,14 @@ const footer = () => {
                             <p>
                                 Для этого необходимо отправить e-mail с вашего корпоративного почтового ящика содержащий:
                             </p>
-                            <p>
-                                контактные данные, реквизиты вашей компании;
-                                прямую ссылку(ссылки) на материал, который вы считаете спорным;
-                                заверенные сканированные копии документов, подтверждающих ваше эксклюзивное право на материал;
-                                в случае, если вы представляете интересы другой компании – копии документов на посреднические услуги;
-                            </p>
+                            <div>
+                                <ul>
+                                    <li>контактные данные, реквизиты вашей компании;</li>
+                                    <li>прямую ссылку(ссылки) на материал, который вы считаете спорным;</li>
+                                    <li>заверенные сканированные копии документов, подтверждающих ваше эксклюзивное право на материал;</li>
+                                    <li>в случае, если вы представляете интересы другой компании – копии документов на посреднические услуги;</li>
+                                </ul>
+                            </div>
                             <p>На адрес <a href="mailto:abuse-kinnot@gmail.com">abuse-kinnot@gmail.com</a></p>
                         </div>
                     </div>

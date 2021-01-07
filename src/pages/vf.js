@@ -60,7 +60,7 @@ class View extends React.Component {
                     <meta name="description" content={this.props.films.filmsCurrent.description} />
                     <meta name="keywords" content={this.props.films.filmsCurrent.keywords} />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <meta name="theme-color" content="#000000" />
+                    <meta name="theme-color" content="#444" />
                 </Helmet>
 
 
@@ -74,12 +74,12 @@ class View extends React.Component {
 
                     <div className="uk-container uk-container-small uk-margin-top">
 
-                        <div className="uk-column-1-2@s uk-column-1-3@m uk-column-1-4@l">
+                        <div className="uk-column-1-2@s uk-column-1-3@m uk-column-1-3@l">
                             <img 
                             src={"http://tube-serv" + this.props.films.filmsCurrent.poster_img} alt={this.props.films.filmsCurrent.slug} 
                                 className="uk-margin-small-bottom"
                             />
-                            <div className="uk-article-meta">
+                            <div>
                                 <p>Оригинальное название: {this.props.films.filmsCurrent.original_title}</p>
                                 <p dangerouslySetInnerHTML={this.createMarkup("Слоган: " + this.props.films.filmsCurrent.tagline)}></p>
                                 <p>Режиссер: {this.props.films.filmsCurrent.producer}</p>
@@ -87,15 +87,14 @@ class View extends React.Component {
                                 <p>Премьера в мире: {this.props.films.filmsCurrent.world_premiere}</p>
                                 <p>Премьера в России: {this.props.films.filmsCurrent.release_date_in_russia}</p>
                                 <p>Продолжительность: {this.props.films.filmsCurrent.duration}</p>
-                                <p>Год {this.props.films.filmsCurrent.year}</p>
+                                <p>Год: {this.props.films.filmsCurrent.year}</p>
                             </div>
                         </div>
 
                         <div className="
                         uk-padding-small 
                         uk-padding-remove-left 
-                        uk-padding-remove-right 
-                        uk-article-meta" dangerouslySetInnerHTML={this.createMarkup(this.props.films.filmsCurrent.content)}></div>
+                        uk-padding-remove-right" dangerouslySetInnerHTML={this.createMarkup(this.props.films.filmsCurrent.content)}></div>
 
                     </div>
 

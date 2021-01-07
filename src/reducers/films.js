@@ -5,10 +5,11 @@ const stateInit = {
     filmsCurrent: {},
     filmsFromIdGenre: [],
     filterFilmsFromGenresHome: [],
-    btnViewPlay: true,
     popoverViewPremiere: {},
     popoverViewFilter: {},
     popoverViewFilmGenre: {},
+    popoverViewFilmGenreSlider: {},
+    btnViewPlay: true,
 }
 
 const films = (state = stateInit, action) => {
@@ -106,6 +107,15 @@ const films = (state = stateInit, action) => {
             return {
                 ...state,
                 popoverViewFilmGenre
+            };
+
+        case "STATE_POPOVER_FILM_GENRE_SLIDER_VIEW":
+
+            const popoverViewFilmGenreSlider = action.popoverViewFilmGenreSlider;
+
+            return {
+                ...state,
+                popoverViewFilmGenreSlider
             };
 
 

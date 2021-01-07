@@ -165,3 +165,12 @@ export const getStatePopoverViewFilmGenre = (popoverViewFilmGenre) => {
         popoverViewFilmGenre
     }
 }
+
+// 9.
+// Передаем параметры для отображения Popover окна с краткими данными по фильму в карточке фильма для "Слайдера"
+export const getStatePopoverViewFilmGenreSlider = (popoverViewFilmGenreSlider) => {
+    return {
+        type: 'STATE_POPOVER_FILM_GENRE_SLIDER_VIEW',
+        popoverViewFilmGenreSlider
+    }
+}
