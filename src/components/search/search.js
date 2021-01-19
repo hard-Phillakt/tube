@@ -1,21 +1,79 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+import _ from 'lodash';
+import * as JsSearch from 'js-search';
+import { getSearchFilms } from '../../actions/actionsSearch';
+
+import {
+    getAsyncAllFilmsFromGenreAction,
+    getAsyncFilmByIdFromSliderAction,
+    getStateBntPlay,
+} from '../../actions/actionsFilms';
+
+
 import './_search.scss';
 
 
 class Search extends React.Component {
+    constructor(props) {
+        super(props);
+        this.RefSearchInput = React.createRef();
+    }
 
+
+    getFilmsForSearch(searchElLine) {
+
+        let searchFilmsList = this.props.films.filmsAllFromAllGenres;
+        let searchList = {};
+        let searchListArr = [];
+
+        searchFilmsList.forEach((itemGenres, i) => {
+
+            // Массив фильмов по жанрам
+            let filmsToGenres = itemGenres.films_to_genres;
+            // let arrTitle = filmsToGenres;
+
+            filmsToGenres.forEach((item, i) => {
+                // console.log(filmsToGenres[i].title);
+                item.genre = {
+                    'id': itemGenres.id,
+                    'slug': itemGenres.slug
+                };
+                // объект для исключения дублей в конечном массиве searchListArr
+                searchList[item.id] = item;
+            });
+
+        });
+
+        // Подготавливем массив searchListArr
+        Object.keys(searchList).map((i) => {
+            searchListArr.push(searchList[i]);
+        });
+
+        const search = new JsSearch.Search('id');
+        // Индексируем поиск по Заголовкам
+        search.addIndex('title');
+        search.addDocuments(searchListArr);
+        let searchResult = search.search(searchElLine);
+
+        // Данные для экшена 
+        this.props.setSearchFilms(searchResult);
+    }
 
     render() {
         return (
             <div className="quickSearch-wrap">
                 <div>
-                    <input className="uk-input uk-form-width-small uk-margin-small-right"
+                    <input id="uk-input-search" ref={this.RefSearchInput} className="uk-input uk-form-width-large uk-margin-small-right"
                         type="text"
-                        placeholder="Поиск"
+                        placeholder="Поиск по фильмам"
+
                         onChange={(e) => {
 
-                            console.log(e.target.value)
+                            let searchElLine = e.target.value;
+                            this.getFilmsForSearch(searchElLine);
+
                         }}
                     />
 
@@ -28,122 +86,89 @@ class Search extends React.Component {
                         <div className="search-results-content">
                             <div className="cards">
                                 <div className="cards-list videos-list">
-                                    <div className="card uk-grid-small" uk-grid="true">
 
-                                        <div className="thumbnail">
-                                            <div className="thumb">
-                                                <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                    <img src="https://s7.vcdn.biz/static/f/661570171/image.jpg/pt/r193x272x4" alt="Варвара-краса, длинная коса" />
-                                                </a>
-                                            </div>
-                                        </div>
+                                    {
+                                        this.props.search.searchFilms ?
+                                            this.props.search.searchFilms.map((item, i) => {
+                                                return (
+                                                    <div
+                                                        key={item.title}
+                                                        className="card uk-grid-small" uk-grid="true">
 
-                                        <div className="card-content video-content">
-                                            <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                <h3 className="video-title">
-                                                    Варвара-краса, длинная коса
-                                                    </h3>
-                                            </a>
-                                            <div className="video-info">
-                                                <span className="video-year">1969</span>,
-                                                    <span className="video-country">Семейные</span>
-                                            </div>
-                                        </div>
+                                                        <div className="thumbnail">
+                                                            <div className="thumb">
+                                                                <Link
+                                                                    onClick={() => {
+                                                                        this.props.setAsyncFilmByIdFromSliderAction(item.id);
+                                                                        this.props.setStateBntPlay(true);
 
-                                    </div>
-                                    <div className="card uk-grid-small" uk-grid="true">
+                                                                        // Обновляем список фильмов в слайдере под фильмом
+                                                                        let param = {
+                                                                            id_genre: item.genre.id,
+                                                                            genre: item.genre.slug,
+                                                                            id_films: item.id,
+                                                                            slug: item.slug
+                                                                        };
 
-                                        <div className="thumbnail">
-                                            <div className="thumb">
-                                                <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                    <img src="https://s7.vcdn.biz/static/f/661570171/image.jpg/pt/r193x272x4" alt="Варвара-краса, длинная коса" />
-                                                </a>
-                                            </div>
-                                        </div>
+                                                                        // Вывоводим фильмы по жанрам в слайдер в карточке 
+                                                                        this.props.setAsyncAllFilmsFromGenreAction(param);
+                                                                        // Очищаем состояние поиска
+                                                                        this.getFilmsForSearch('');
+                                                                        // Очищаем input поиска
+                                                                        this.RefSearchInput.current.value = '';
+                                                                    }}
+                                                                    to={`/vf/${item.genre.id}/${item.genre.slug}/${item.id}/${item.slug}`}
+                                                                >
+                                                                    <img src={'http://tube-serv/' + item.poster_img} alt={item.slug} />
+                                                                </Link>
+                                                            </div>
+                                                        </div>
 
-                                        <div className="card-content video-content">
-                                            <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                <h3 className="video-title">
-                                                    Варвара-краса, длинная коса
-                                                    </h3>
-                                            </a>
-                                            <div className="video-info">
-                                                <span className="video-year">1969</span>,
-                                                    <span className="video-country">Семейные</span>
-                                            </div>
-                                        </div>
+                                                        <div className="card-content video-content">
+                                                            <Link
+                                                                onClick={() => {
+                                                                    this.props.setAsyncFilmByIdFromSliderAction(item.id);
+                                                                    this.props.setStateBntPlay(true);
 
-                                    </div>
-                                    <div className="card uk-grid-small" uk-grid="true">
+                                                                    // Обновляем список фильмов в слайдере под фильмом
+                                                                    let param = {
+                                                                        id_genre: item.genre.id,
+                                                                        genre: item.genre.slug,
+                                                                        id_films: item.id,
+                                                                        slug: item.slug
+                                                                    };
 
-                                        <div className="thumbnail">
-                                            <div className="thumb">
-                                                <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                    <img src="https://s7.vcdn.biz/static/f/661570171/image.jpg/pt/r193x272x4" alt="Варвара-краса, длинная коса" />
-                                                </a>
-                                            </div>
-                                        </div>
+                                                                    // Вывоводим фильмы по жанрам в слайдер в карточке 
+                                                                    this.props.setAsyncAllFilmsFromGenreAction(param);
+                                                                    // Очищаем состояние поиска
+                                                                    this.getFilmsForSearch('');
+                                                                    // Очищаем input поиска
+                                                                    this.RefSearchInput.current.value = '';
+                                                                }}
+                                                                to={`/vf/${item.genre.id}/${item.genre.slug}/${item.id}/${item.slug}`}
+                                                            >
+                                                                <h3 className="video-title">
+                                                                    {item.title}
+                                                                </h3>
+                                                            </Link>
 
-                                        <div className="card-content video-content">
-                                            <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                <h3 className="video-title">
-                                                    Варвара-краса, длинная коса
-                                                    </h3>
-                                            </a>
-                                            <div className="video-info">
-                                                <span className="video-year">1969</span>,
-                                                    <span className="video-country">Семейные</span>
-                                            </div>
-                                        </div>
+                                                            <div className="video-info">
+                                                                <div>
+                                                                    <span className="video-year">Премьера в мире: {item.year}</span>
+                                                                </div>
+                                                                <div>
+                                                                    <span className="video-country">Продолжительность: {item.duration}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                    </div>
-                                    <div className="card uk-grid-small" uk-grid="true">
+                                                    </div>
+                                                )
+                                            })
+                                            :
+                                            null
+                                    }
 
-                                        <div className="thumbnail">
-                                            <div className="thumb">
-                                                <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                    <img src="https://s7.vcdn.biz/static/f/661570171/image.jpg/pt/r193x272x4" alt="Варвара-краса, длинная коса" />
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div className="card-content video-content">
-                                            <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                <h3 className="video-title">
-                                                    Варвара-краса, длинная коса
-                                                    </h3>
-                                            </a>
-                                            <div className="video-info">
-                                                <span className="video-year">1969</span>,
-                                                    <span className="video-country">Семейные</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="card uk-grid-small" uk-grid="true">
-
-                                        <div className="thumbnail">
-                                            <div className="thumb">
-                                                <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                    <img src="https://s7.vcdn.biz/static/f/661570171/image.jpg/pt/r193x272x4" alt="Варвара-краса, длинная коса" />
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div className="card-content video-content">
-                                            <a href="https://megogo.ru/ru/view/4302-varvara-krasa-dlinnaya-kosa.html">
-                                                <h3 className="video-title">
-                                                    Варвара-краса, длинная коса
-                                                </h3>
-                                            </a>
-                                            <div className="video-info">
-                                                <span className="video-year">1969</span>,
-                                                <span className="video-country">Семейные</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -159,13 +184,24 @@ class Search extends React.Component {
 }
 
 
-const mapStateToProps = (props) => (props);
+const mapStateToProps = (props) => {
+    return props;
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // setAsyncAllFilmsFromGenreAction: (param) => {
-        //     dispatch(getAsyncAllFilmsFromGenreAction(param));
-        // },
+        setSearchFilms: (searchFilms) => {
+            dispatch(getSearchFilms(searchFilms));
+        },
+        setStateBntPlay: (param) => {
+            dispatch(getStateBntPlay(param))
+        },
+        setAsyncFilmByIdFromSliderAction: (param) => {
+            dispatch(getAsyncFilmByIdFromSliderAction(param));
+        },
+        setAsyncAllFilmsFromGenreAction: (param) => {
+            dispatch(getAsyncAllFilmsFromGenreAction(param));
+        },
     };
 };
 

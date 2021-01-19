@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { getAsyncFilmbyIdAction, getStateBntPlay } from '../actions/actionsFilms';
+import { getAsyncFilmbyIdAction, getStateBntPlay, getAsyncFilms } from '../actions/actionsFilms';
 import Hls from '../../node_modules/hls.js';
 
 import { Helmet } from "react-helmet";
@@ -22,6 +22,7 @@ class View extends React.Component {
     componentDidMount() {
         //  Длаем выборку ajax фильма по id
         this.props.setAsyncFilmbyIdAction(this.props.match.params);
+        this.props.setAsyncFilmsHandler();
     }
 
     filmPlay() {
@@ -30,7 +31,14 @@ class View extends React.Component {
         const videoSrc = this.props.films.filmsCurrent.proxy_url_video + "/" + this.props.films.filmsCurrent.original_url_video;
 
         if (Hls.isSupported()) {
-            const hls = new Hls();
+            var config = {
+                xhrSetup: function (xhr, url) {
+                    var data = new Date().getTime()
+                    xhr.setRequestHeader('x-token', 'token-example ' + data);
+                },
+            };
+            const hls = new Hls(config);
+
             hls.loadSource(videoSrc);
             hls.attachMedia(this.RefPlayer.current);
             this.RefPlayer.current.play();
@@ -75,8 +83,8 @@ class View extends React.Component {
                     <div className="uk-container uk-container-small uk-margin-top">
 
                         <div className="uk-column-1-2@s uk-column-1-3@m uk-column-1-3@l">
-                            <img 
-                            src={"http://tube-serv" + this.props.films.filmsCurrent.poster_img} alt={this.props.films.filmsCurrent.slug} 
+                            <img
+                                src={"http://tube-serv" + this.props.films.filmsCurrent.poster_img} alt={this.props.films.filmsCurrent.slug}
                                 className="uk-margin-small-bottom"
                             />
                             <div>
@@ -133,7 +141,7 @@ class View extends React.Component {
 
                                                     <span className="material-icons">
                                                         play_arrow
-                                                </span>
+                                                    </span>
                                                 </div>
                                                 :
                                                 null
@@ -183,6 +191,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setStateBntPlay: (param) => {
             dispatch(getStateBntPlay(param))
+        },
+        setAsyncFilmsHandler: (count) => {
+            dispatch(getAsyncFilms(count));
         }
     };
 };

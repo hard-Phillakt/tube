@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import SectionsHome from '../components/sections/sectionsHome';
 import SectionsHomeFilter from '../components/sections/sectionsHomeFilter';
 import DescriptionBrief from '../components/description-brief/descriptionBrief';
+
 import {
   getAsyncFilmsAllAction,
   getAsyncFilms,

@@ -86,22 +86,6 @@ export const getAsyncAllFilmsFromGenreAction = (params) => {
 
                 dispatch(getAllFilmsFromGenreAction(filmsFromIdGenre));
 
-                // json.films_to_genres.forEach((item, i) => {
-
-                //     // if (cat.slug === params.cat) {
-                //     //     let allFilms = [];
-
-                //     //     cat.films.find((item) => {
-                //     //         if (item.id !== parseInt(params.id)) {
-                //     //             allFilms.push(item);
-                //     //         }
-                //     //     })
-
-                //     //     dispatch(getAllFilmsFromGenreAction(allFilms));
-                //     // }
-
-                // });
-
             });
 }
 
